@@ -22,10 +22,10 @@
         android:id="@+id/image_button_player_replay"
         android:layout_width="@dimen/width_player_button"
         android:layout_height="@dimen/height_player_button"
-        android:background="@drawable/background_focused_icons_player"
         android:layout_marginStart="@dimen/spacing_4x"
         android:layout_marginTop="@dimen/spacing_10x"
-        android:contentDescription="@string/button_back_description"
+        android:background="@drawable/background_focused_icons_player"
+        android:contentDescription="@string/button_back_to_start_description"
         android:src="@drawable/baseline_replay_24"
         app:layout_constraintStart_toEndOf="@id/image_button_player_back"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +38,7 @@
         android:layout_marginStart="@dimen/spacing_4x"
         android:layout_marginTop="@dimen/spacing_10x"
         android:background="@drawable/background_focused_icons_player"
-        android:contentDescription="@string/button_back_description"
+        android:contentDescription="@string/button_previous_description"
         android:src="@drawable/baseline_skip_previous_24"
         app:layout_constraintStart_toEndOf="@id/image_button_player_replay"
         app:layout_constraintTop_toTopOf="parent"
@@ -51,11 +51,48 @@
         android:layout_marginStart="@dimen/spacing_4x"
         android:layout_marginTop="@dimen/spacing_10x"
         android:background="@drawable/background_focused_icons_player"
-        android:contentDescription="@string/button_back_description"
+        android:contentDescription="@string/button_next_description"
         android:src="@drawable/baseline_skip_next_24"
         app:layout_constraintStart_toEndOf="@id/exo_prev"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/text_view_player_focus_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_4x"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/font_size_ms"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/exo_next"
+        app:layout_constraintStart_toStartOf="@id/image_button_player_back"
+        app:layout_constraintTop_toBottomOf="@id/image_button_player_back"
+        tools:text="Text hint" />
+
+    <TextView
+        android:id="@+id/text_view_player_title_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_10x"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/font_size_ml"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="The Walking Dead" />
+
+    <TextView
+        android:id="@+id/text_view_player_media_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_2x"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/font_size_ms"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/text_view_player_title_name"
+        app:layout_constraintTop_toBottomOf="@id/text_view_player_title_name"
+        tools:text="Episode 1" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -68,13 +105,13 @@
             android:id="@+id/exo_play_pause"
             android:layout_width="@dimen/width_player_button"
             android:layout_height="@dimen/height_player_button"
-            android:src="@drawable/baseline_play_arrow_24"
+            android:layout_margin="@dimen/spacing_1x"
             android:background="@drawable/background_focused_icons_player"
-            android:contentDescription="@string/button_back_description"
+            android:contentDescription="@string/button_play_description"
+            android:src="@drawable/baseline_play_arrow_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="@dimen/spacing_1x"
             app:tint="@color/white" />
 
         <TextView
@@ -92,9 +129,9 @@
             android:id="@+id/exo_progress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_4x"
             android:contentDescription="@string/time_bar_description"
             app:buffered_color="@color/red_700"
-            android:layout_marginHorizontal="@dimen/spacing_4x"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/exo_duration"
             app:layout_constraintStart_toEndOf="@id/exo_position"
@@ -109,11 +146,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_4x"
+            android:layout_marginEnd="@dimen/spacing_1x"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="@dimen/spacing_1x"
             tools:text="00:00:00" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
