@@ -6,11 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
-    <androidx.media3.ui.PlayerView
+    <com.google.android.exoplayer2.ui.StyledPlayerView
         android:id="@+id/player_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:use_controller="true"
+        android:background="@color/black"
+        app:animation_enabled="false"
         app:controller_layout_id="@layout/custom_player"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
