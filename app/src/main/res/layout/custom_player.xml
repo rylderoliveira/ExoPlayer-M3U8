@@ -97,8 +97,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_20x"
-        android:layout_marginBottom="@dimen/spacing_5x"
+        android:layout_marginHorizontal="@dimen/spacing_24x"
+        android:layout_marginBottom="@dimen/spacing_8x"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageButton
@@ -120,6 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_4x"
             android:textColor="@color/white"
+            android:textSize="@dimen/font_size_ms"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/exo_play_pause"
             app:layout_constraintTop_toTopOf="parent"
@@ -148,6 +149,7 @@
             android:layout_marginStart="@dimen/spacing_4x"
             android:layout_marginEnd="@dimen/spacing_1x"
             android:textColor="@color/white"
+            android:textSize="@dimen/font_size_ms"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

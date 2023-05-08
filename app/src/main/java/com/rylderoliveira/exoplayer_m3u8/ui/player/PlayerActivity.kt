@@ -1,7 +1,8 @@
-package com.rylderoliveira.exoplayer_m3u8
+package com.rylderoliveira.exoplayer_m3u8.ui.player
 
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -9,16 +10,17 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.video.VideoSize
-import com.rylderoliveira.exoplayer_m3u8.databinding.ActivityMainBinding
+import com.rylderoliveira.exoplayer_m3u8.databinding.ActivityPlayerBinding
 
-class MainActivity : AppCompatActivity() {
+class PlayerActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityPlayerBinding
     private lateinit var player: ExoPlayer
+    private val viewModel: PlayerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val trackSelector = DefaultTrackSelector(this)
@@ -126,7 +128,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val mediaItem =
-            MediaItem.fromUri(Uri.parse("http://149.57.33.3:3100/hls/pantera/panterateste3.json/master.m3u8"))
+            MediaItem.fromUri(Uri.parse("http://149.57.33.3:3100/hls/pantera/panterateste11.json/master.m3u8"))
         binding.playerView.player = player
         player.setMediaItem(mediaItem)
         player.addListener(playerListener)
