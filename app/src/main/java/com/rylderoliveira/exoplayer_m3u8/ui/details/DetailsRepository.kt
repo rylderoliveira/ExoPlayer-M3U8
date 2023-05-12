@@ -5,4 +5,5 @@ import retrofit2.Response
 
 interface DetailsRepository {
     suspend fun getMovie(): Response<Title?>
+    suspend fun saveMovie(title: Title?)
 }

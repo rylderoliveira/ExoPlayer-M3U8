@@ -21,6 +21,7 @@ class DetailsViewModel(
             try {
                 // start loading
                 if (response.isSuccessful) {
+                    repository.saveMovie(response.body())
                     _title.postValue(response.body())
                 } else {
                     // do nothing

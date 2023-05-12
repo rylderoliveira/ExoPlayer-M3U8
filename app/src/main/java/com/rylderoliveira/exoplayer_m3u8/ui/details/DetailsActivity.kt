@@ -3,8 +3,6 @@ package com.rylderoliveira.exoplayer_m3u8.ui.details
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import com.rylderoliveira.exoplayer_m3u8.data.models.Title
 import com.rylderoliveira.exoplayer_m3u8.databinding.ActivityDetailsBinding
 import com.rylderoliveira.exoplayer_m3u8.ui.player.PlayerActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,11 +18,10 @@ class DetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
         initListeners()
 
-        val a = Observer<Title?> {
+        viewModel.title.observe(this) {
             val intent = Intent(this, PlayerActivity::class.java)
             startActivity(intent)
         }
-        viewModel.title.observe(this, a)
     }
 
     private fun initListeners() {

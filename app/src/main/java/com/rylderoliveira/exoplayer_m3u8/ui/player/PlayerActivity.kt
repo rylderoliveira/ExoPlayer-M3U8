@@ -2,7 +2,7 @@ package com.rylderoliveira.exoplayer_m3u8.ui.player
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.viewModels
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -10,18 +10,36 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.video.VideoSize
+import com.rylderoliveira.exoplayer_m3u8.R
 import com.rylderoliveira.exoplayer_m3u8.databinding.ActivityPlayerBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
     private lateinit var player: ExoPlayer
-    private val viewModel: PlayerViewModel by viewModels()
+    private lateinit var textViewTitleName: TextView
+    private lateinit var textViewMediaName: TextView
+    private val viewModel: PlayerViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initViews()
+        viewModel.title.observe(this) { title ->
+            textViewTitleName.text = title?.title
+            if (title?.episodes?.isNotEmpty() == true) {
+                textViewMediaName.text = title.episodes.first()?.episodeName
+            }
+            val mediaItem =
+                MediaItem.fromUri(Uri.parse(title?.mediaUrl ?: title?.episodes?.first()?.mediaUrl))
+            binding.playerView.player = player
+            player.setMediaItem(mediaItem)
+//            player.addListener(playerListener)
+            player.prepare()
+            player.play()
+        }
 
         val trackSelector = DefaultTrackSelector(this)
 
@@ -127,12 +145,12 @@ class PlayerActivity : AppCompatActivity() {
 //        }
 
 
-        val mediaItem =
-            MediaItem.fromUri(Uri.parse("http://149.57.33.3:3100/hls/pantera/panterateste11.json/master.m3u8"))
-        binding.playerView.player = player
-        player.setMediaItem(mediaItem)
-        player.addListener(playerListener)
-        player.prepare()
-        player.play()
+    }
+
+    private fun initViews() {
+        binding.playerView.apply {
+            textViewTitleName = findViewById(R.id.text_view_player_title_name)
+            textViewMediaName = findViewById(R.id.text_view_player_media_name)
+        }
     }
 }
