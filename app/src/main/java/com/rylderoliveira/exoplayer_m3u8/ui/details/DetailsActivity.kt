@@ -26,7 +26,8 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun initListeners() {
         binding.button.setOnClickListener {
-            viewModel.loadMovie()
+            val intent = Intent(this, PlayerActivity::class.java)
+            startActivity(intent)
         }
     }
 }

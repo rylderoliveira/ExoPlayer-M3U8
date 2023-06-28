@@ -21,7 +21,12 @@ class PlayerViewModel(
     }
 
     private suspend fun loadTitle() {
-        val title = playerRepository.getTitle()
+        val title = Title(
+            id = 0,
+            title = "Rock Balboa",
+            mediaUrl = "https://i-slave1.odeonvod.com/data1/videos/filme/dual/decada/2010/522938_rambo___ate_o_fim/h264/576/rambo___ate_o_fim.mp4",
+            episodes = listOf()
+        )
         _title.postValue(title)
     }
 }

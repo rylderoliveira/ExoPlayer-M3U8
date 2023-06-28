@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="CustomPlayerView">
+        <attr name="controller_layout_id" format="reference"/>
+    </declare-styleable>
+</resources>

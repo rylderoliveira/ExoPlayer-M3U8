@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="stroke_1x">1dp</dimen>
+    <dimen name="stroke_2x">2dp</dimen>
+    <dimen name="stroke_3x">3dp</dimen>
+    <dimen name="stroke_4x">4dp</dimen>
+    <dimen name="stroke_5x">5dp</dimen>
+    <dimen name="stroke_6x">6dp</dimen>
+    <dimen name="stroke_7x">7dp</dimen>
+    <dimen name="stroke_8x">8dp</dimen>
+    <dimen name="stroke_9x">9dp</dimen>
+    <dimen name="stroke_10x">10dp</dimen>
+</resources>

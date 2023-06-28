@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="false">
+        <color android:color="@android:color/transparent"/>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="oval" >
+            <gradient
+                android:gradientRadius="@dimen/spacing_5x"
+                android:type="radial"
+                android:startColor="#8DFFFFFF"
+                android:endColor="@android:color/transparent"/>
+        </shape>
+    </item>
+</selector>

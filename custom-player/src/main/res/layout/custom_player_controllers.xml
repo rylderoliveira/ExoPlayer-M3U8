@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout_custom_controller"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:background="@color/black">
@@ -95,6 +96,7 @@
         tools:text="Episode 1" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_24x"
@@ -154,6 +156,43 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="00:00:00" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_select_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_4x"
+            android:text="Audio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/exo_progress" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_select_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_4x"
+            android:text="Video"
+            app:layout_constraintStart_toEndOf="@id/button_select_audio"
+            app:layout_constraintTop_toBottomOf="@id/exo_progress" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_select_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_4x"
+            android:text="Legenda"
+            app:layout_constraintStart_toEndOf="@id/button_select_video"
+            app:layout_constraintTop_toBottomOf="@id/exo_progress" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_select_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_4x"
+            android:text="Teste"
+            app:layout_constraintStart_toEndOf="@id/button_select_subtitle"
+            app:layout_constraintTop_toBottomOf="@id/exo_progress" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

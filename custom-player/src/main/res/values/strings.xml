@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ExoPlayer-M3U8</string>
+
+    <!--  Player accessibility  -->
+    <string name="time_bar_description">Time bar</string>
+    <string name="button_back_description">Back</string>
+    <string name="button_back_to_start_description">Back to start</string>
+    <string name="button_previous_description">Previous</string>
+    <string name="button_next_description">Next</string>
+    <string name="button_play_description">Play</string>
+
+</resources>
