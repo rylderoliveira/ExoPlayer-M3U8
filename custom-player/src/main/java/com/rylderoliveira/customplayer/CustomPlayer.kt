@@ -64,6 +64,15 @@ class CustomPlayer(
     }
 
     private fun MutableList<CustomTrack>.populate(group: Tracks.Group) {
+
+        for (index in 0 until group.mediaTrackGroup.length) {
+            val track = CustomTrack(
+                index = index,
+                name = trackExtractor.getTrackName(group.mediaTrackGroup.getFormat(index)),
+                group = group.mediaTrackGroup
+            )
+            add(track)
+        }
         if (group.isAdaptiveSupported) {
             val track = CustomTrack(
                 index = -1,
@@ -77,14 +86,6 @@ class CustomPlayer(
                 index = -1,
                 name = "desligado".uppercase(),
                 group = null
-            )
-            add(track)
-        }
-        for (index in 0 until group.mediaTrackGroup.length) {
-            val track = CustomTrack(
-                index = index,
-                name = trackExtractor.getTrackName(group.mediaTrackGroup.getFormat(index)),
-                group = group.mediaTrackGroup
             )
             add(track)
         }
