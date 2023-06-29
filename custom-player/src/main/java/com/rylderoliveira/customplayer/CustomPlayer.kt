@@ -8,6 +8,8 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.Tracks
+import com.google.android.exoplayer2.extractor.mp4.Track
+import com.google.android.exoplayer2.source.TrackGroup
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector
 import com.google.android.exoplayer2.trackselection.TrackSelectionParameters
@@ -53,9 +55,38 @@ class CustomPlayer(
     private fun setCustomTracks() {
         val groups = player.currentTracks.groups
         for (group in groups) {
-            for (i in 0 until group.length) {
-
+            when (group.type) {
+                C.TRACK_TYPE_TEXT -> subtitleTracks.populate(group)
+                C.TRACK_TYPE_VIDEO -> videoTracks.populate(group)
+                C.TRACK_TYPE_AUDIO -> audioTracks.populate(group)
             }
+        }
+    }
+
+    private fun MutableList<CustomTrack>.populate(group: Tracks.Group) {
+        if (group.isAdaptiveSupported) {
+            val track = CustomTrack(
+                index = -1,
+                name = "auto".uppercase(),
+                group = null
+            )
+            add(track)
+        }
+        if (group.type == C.TRACK_TYPE_TEXT && any { it.index == -1 }.not()) {
+            val track = CustomTrack(
+                index = -1,
+                name = "desligado".uppercase(),
+                group = null
+            )
+            add(track)
+        }
+        for (index in 0 until group.mediaTrackGroup.length) {
+            val track = CustomTrack(
+                index = index,
+                name = trackExtractor.getTrackName(group.mediaTrackGroup.getFormat(index)),
+                group = group.mediaTrackGroup
+            )
+            add(track)
         }
     }
 

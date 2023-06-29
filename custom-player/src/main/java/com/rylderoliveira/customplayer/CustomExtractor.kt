@@ -3,6 +3,7 @@ package com.rylderoliveira.customplayer
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.Format
 import com.google.android.exoplayer2.Tracks
+import com.google.android.exoplayer2.source.TrackGroup
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector
 import com.google.android.exoplayer2.trackselection.TrackSelectionOverride
@@ -19,8 +20,8 @@ class CustomExtractor(
 
     fun selectCustomTrack(customTrack: CustomTrack) {
         trackSelector.parameters = trackSelector.parameters.buildUpon()
-            .clearOverridesOfType(customTrack.group.type)
-            .addOverride(TrackSelectionOverride(customTrack.group, customTrack.index))
+            .clearOverridesOfType(customTrack.group?.type ?: -1)
+            .addOverride(TrackSelectionOverride(customTrack.group ?: TrackGroup(), customTrack.index))
             .build()
     }
 
