@@ -5,7 +5,9 @@ import android.net.Uri
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.MediaMetadata
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.Player.COMMAND_PREPARE
 import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.Tracks
 import com.google.android.exoplayer2.extractor.mp4.Track
@@ -38,38 +40,33 @@ class CustomPlayer(
         player.setMediaItem(MediaItem.fromUri(Uri.parse(url)))
         player.prepare()
         player.addListener(object : Player.Listener {
-            override fun onPlaybackStateChanged(playbackState: Int) {
-                super.onPlaybackStateChanged(playbackState)
-                if (playbackState == STATE_READY) {
-                    setCustomTracks()
-                }
-            }
-
-            override fun onTracksChanged(tracks: Tracks) {
-                super.onTracksChanged(tracks)
-//                setCustomTracks()
+            override fun onRenderedFirstFrame() {
+                super.onRenderedFirstFrame()
+                setCustomTracks()
             }
         })
     }
 
     private fun setCustomTracks() {
         val groups = player.currentTracks.groups
-        for (group in groups) {
-            when (group.type) {
-                C.TRACK_TYPE_TEXT -> subtitleTracks.populate(group)
-                C.TRACK_TYPE_VIDEO -> videoTracks.populate(group)
-                C.TRACK_TYPE_AUDIO -> audioTracks.populate(group)
+        if (subtitleTracks.isEmpty() && audioTracks.isEmpty() && videoTracks.isEmpty()) {
+            for (group in groups) {
+                when (group.type) {
+                    C.TRACK_TYPE_TEXT -> subtitleTracks.populate(group)
+                    C.TRACK_TYPE_VIDEO -> videoTracks.populate(group)
+                    C.TRACK_TYPE_AUDIO -> audioTracks.populate(group)
+                }
             }
         }
     }
 
     private fun MutableList<CustomTrack>.populate(group: Tracks.Group) {
-
         for (index in 0 until group.mediaTrackGroup.length) {
             val track = CustomTrack(
                 index = index,
                 name = trackExtractor.getTrackName(group.mediaTrackGroup.getFormat(index)),
-                group = group.mediaTrackGroup
+                group = group.mediaTrackGroup,
+                type = group.type
             )
             add(track)
         }
@@ -77,7 +74,8 @@ class CustomPlayer(
             val track = CustomTrack(
                 index = -1,
                 name = "auto".uppercase(),
-                group = null
+                group = null,
+                type = group.type
             )
             add(track)
         }
@@ -85,7 +83,8 @@ class CustomPlayer(
             val track = CustomTrack(
                 index = -1,
                 name = "desligado".uppercase(),
-                group = null
+                group = null,
+                type = group.type
             )
             add(track)
         }
@@ -96,7 +95,13 @@ class CustomPlayer(
     fun next() = player.seekToNextMediaItem()
     fun previous() = player.seekToPreviousMediaItem()
     fun release() = player.release()
-    fun selectTrack(customTrack: CustomTrack) = trackExtractor.selectCustomTrack(customTrack)
+    fun selectTrack(customTrack: CustomTrack) {
+        if (customTrack.index == -1) {
+            trackExtractor.clearOverrides(customTrack.type)
+        } else {
+            trackExtractor.selectCustomTrack(customTrack)
+        }
+    }
 
 
     class Builder(private val context: Context) {

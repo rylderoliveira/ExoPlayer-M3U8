@@ -19,32 +19,18 @@ class CustomExtractor(
     private val locale = Locale.getAvailableLocales()
 
     fun selectCustomTrack(customTrack: CustomTrack) {
-        trackSelector.parameters = trackSelector.parameters.buildUpon()
-            .clearOverridesOfType(customTrack.group?.type ?: -1)
-            .addOverride(TrackSelectionOverride(customTrack.group ?: TrackGroup(), customTrack.index))
-            .build()
+        if (customTrack.group != null) {
+            trackSelector.parameters = trackSelector.parameters.buildUpon()
+                .clearOverridesOfType(customTrack.type)
+                .addOverride(TrackSelectionOverride(customTrack.group, customTrack.index))
+                .build()
+        }
     }
 
-    fun getCustomTracksBy(rendererIndex: Int): List<CustomTrack> {
-        val customTracks = mutableListOf<CustomTrack>()
-        val trackGroupArray = trackSelector.currentMappedTrackInfo?.getTrackGroups(rendererIndex)
-        trackGroupArray?.let {
-            for (trackGroupIndex in 0 until trackGroupArray.length) {
-                val trackGroup = trackGroupArray[trackGroupIndex]
-                for (formatIndex in 0 until trackGroup.length) {
-                    val format = trackGroup.getFormat(formatIndex)
-                    customTracks.add(
-                        CustomTrack(
-                            index = formatIndex,
-                            name = getTrackName(format),
-                            group = trackGroup,
-                        )
-                    )
-                }
-            }
-
-        }
-        return customTracks
+    fun clearOverrides(type: Int) {
+        trackSelector.parameters = trackSelector.parameters.buildUpon()
+            .clearOverridesOfType(type)
+            .build()
     }
 
     fun getTrackName(format: Format): String {

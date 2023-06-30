@@ -6,4 +6,5 @@ data class CustomTrack(
     val index: Int,
     val name: String,
     val group: TrackGroup?,
+    val type: Int,
 )

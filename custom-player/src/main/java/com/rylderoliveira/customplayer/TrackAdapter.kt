@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class VideoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TrackAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var selectedPosition = RecyclerView.NO_POSITION
+    private var selectedPosition = FIRST_INDEX
+    lateinit var listener: ((CustomTrack) -> Unit)
     var items: List<CustomTrack> = listOf()
         set(newItems) {
             field = newItems.sortedBy { it.index }
-            selectedPosition = FIRST_INDEX
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -37,6 +37,7 @@ class VideoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 notifyItemChanged(selectedPosition)
                 selectedPosition = absoluteAdapterPosition
                 notifyItemChanged(selectedPosition)
+                listener.invoke(items[selectedPosition])
             }
         }
 

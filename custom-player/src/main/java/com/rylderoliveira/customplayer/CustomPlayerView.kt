@@ -6,10 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.children
 import androidx.fragment.app.FragmentManager
-import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.trackselection.MappingTrackSelector
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.rylderoliveira.customplayer.databinding.CustomPlayerControllersBinding
 import com.rylderoliveira.customplayer.databinding.ViewCustomPlayerBinding
 
@@ -22,6 +21,9 @@ class CustomPlayerView : FrameLayout {
     private val mergeBinding = CustomPlayerControllersBinding.bind(controllerView)
     var customFragmentManager: FragmentManager? = null
     var customPlayer: CustomPlayer = CustomPlayer.Builder(context).build()
+    private val audioAdapter = TrackAdapter()
+    private val videoAdapter = TrackAdapter()
+    private val textAdapter = TrackAdapter()
 
 
     constructor(context: Context) : super(context) {
@@ -52,13 +54,13 @@ class CustomPlayerView : FrameLayout {
     private fun initListeners() {
         mergeBinding.apply {
             buttonSelectAudio.setOnClickListener {
-                showTrackSelectorDialog(customPlayer.audioTracks)
+                showTrackSelectorDialog(customPlayer.audioTracks, audioAdapter)
             }
             buttonSelectVideo.setOnClickListener {
-                showTrackSelectorDialog(customPlayer.videoTracks)
+                showTrackSelectorDialog(customPlayer.videoTracks, videoAdapter)
             }
             buttonSelectSubtitle.setOnClickListener {
-                showTrackSelectorDialog(customPlayer.subtitleTracks)
+                showTrackSelectorDialog(customPlayer.subtitleTracks, textAdapter)
             }
             buttonSelectTest.setOnClickListener {
 
@@ -71,9 +73,11 @@ class CustomPlayerView : FrameLayout {
         a.recycle()
     }
 
-    private fun showTrackSelectorDialog(tracks: List<CustomTrack>) {
+    private fun showTrackSelectorDialog(tracks: List<CustomTrack>, adapter: TrackAdapter) {
         TrackSelectorDialog().apply {
-            setTracks(tracks)
+            this.adapter = adapter
+            this.onTrackClick = { track -> customPlayer.selectTrack(track) }
+            this.tracks = tracks
             customFragmentManager?.let { show(it, null) } ?: run {
                 Log.e(
                     this.tag,
