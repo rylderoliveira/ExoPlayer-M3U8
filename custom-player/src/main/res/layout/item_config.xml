@@ -6,16 +6,18 @@
     android:orientation="horizontal"
     android:focusable="true"
     android:clickable="true"
-    android:background="@drawable/bg_track_selector">
+    android:background="@drawable/bg_track_selector_dash">
 
     <TextView
         android:id="@+id/text_view_item_config"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginVertical="@dimen/spacing_4x"
-        android:layout_marginStart="@dimen/spacing_6x"
-        android:textSize="@dimen/font_size_mm"
-        android:textColor="@color/color_text_selector"
+        android:duplicateParentState="true"
+        android:layout_marginVertical="@dimen/spacing_3x"
+        android:layout_marginHorizontal="@dimen/spacing_8x"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/font_size_sl"
+        android:textColor="@color/color_text_selector_dash"
         android:text="Português" />
 
 </LinearLayout>

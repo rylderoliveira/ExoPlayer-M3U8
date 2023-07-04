@@ -8,6 +8,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaMetadata
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Player.COMMAND_PREPARE
+import com.google.android.exoplayer2.Player.Listener
 import com.google.android.exoplayer2.Player.STATE_READY
 import com.google.android.exoplayer2.Tracks
 import com.google.android.exoplayer2.extractor.mp4.Track
@@ -24,8 +25,21 @@ class CustomPlayer(
 
     private lateinit var trackSelector: TrackSelector
     private lateinit var trackExtractor: CustomExtractor
+    private lateinit var playerListener: Listener
     lateinit var player: ExoPlayer
 
+    private val autoVideoTrack = CustomTrack(
+        index = -1,
+        name = "auto".uppercase(),
+        group = null,
+        type = C.TRACK_TYPE_VIDEO,
+    )
+    private val subtitleOff = CustomTrack(
+        index = -1,
+        name = "desligado".uppercase(),
+        group = null,
+        type =C.TRACK_TYPE_TEXT,
+    )
     val audioTracks: MutableList<CustomTrack> = mutableListOf()
     val videoTracks: MutableList<CustomTrack> = mutableListOf()
     val subtitleTracks: MutableList<CustomTrack> = mutableListOf()
@@ -39,15 +53,16 @@ class CustomPlayer(
     fun setMediaBy(url: String) {
         player.setMediaItem(MediaItem.fromUri(Uri.parse(url)))
         player.prepare()
-        player.addListener(object : Player.Listener {
-            override fun onRenderedFirstFrame() {
-                super.onRenderedFirstFrame()
-                setCustomTracks()
-            }
-        })
+//        player.addListener(object : Player.Listener {
+//            override fun onRenderedFirstFrame() {
+//                super.onRenderedFirstFrame()
+//                setCustomTracks()
+//            }
+//        })
+        player.addListener(playerListener)
     }
 
-    private fun setCustomTracks() {
+    fun setCustomTracks() {
         val groups = player.currentTracks.groups
         if (subtitleTracks.isEmpty() && audioTracks.isEmpty() && videoTracks.isEmpty()) {
             for (group in groups) {
@@ -56,6 +71,12 @@ class CustomPlayer(
                     C.TRACK_TYPE_VIDEO -> videoTracks.populate(group)
                     C.TRACK_TYPE_AUDIO -> audioTracks.populate(group)
                 }
+            }
+            if (videoTracks.contains(autoVideoTrack).not()) {
+                videoTracks.add(autoVideoTrack)
+            }
+            if (subtitleTracks.contains(subtitleOff).not()) {
+                subtitleTracks.add(subtitleOff)
             }
         }
     }
@@ -66,24 +87,6 @@ class CustomPlayer(
                 index = index,
                 name = trackExtractor.getTrackName(group.mediaTrackGroup.getFormat(index)),
                 group = group.mediaTrackGroup,
-                type = group.type
-            )
-            add(track)
-        }
-        if (group.isAdaptiveSupported) {
-            val track = CustomTrack(
-                index = -1,
-                name = "auto".uppercase(),
-                group = null,
-                type = group.type
-            )
-            add(track)
-        }
-        if (group.type == C.TRACK_TYPE_TEXT && any { it.index == -1 }.not()) {
-            val track = CustomTrack(
-                index = -1,
-                name = "desligado".uppercase(),
-                group = null,
                 type = group.type
             )
             add(track)
@@ -103,11 +106,16 @@ class CustomPlayer(
         }
     }
 
+    fun restart() {
+        player.seekTo(0L)
+    }
+
 
     class Builder(private val context: Context) {
 
         private var _trackSelector: MappingTrackSelector = DefaultTrackSelector(context)
         private var _trackExtractor: CustomExtractor = CustomExtractor(_trackSelector)
+        private lateinit var _playerListener: Player.Listener
 
         fun setTrackSelector(trackSelector: MappingTrackSelector): Builder {
             _trackSelector = trackSelector
@@ -119,10 +127,17 @@ class CustomPlayer(
             return this
         }
 
+
+        fun setPlayerListener(playerListener: Player.Listener): Builder {
+            _playerListener = playerListener
+            return this
+        }
+
         fun build(): CustomPlayer {
             return CustomPlayer(context = context).apply {
                 trackSelector = _trackSelector
                 trackExtractor = _trackExtractor
+                playerListener = _playerListener
                 initialize()
             }
         }

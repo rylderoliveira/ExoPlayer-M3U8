@@ -13,6 +13,7 @@ class TrackAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var items: List<CustomTrack> = listOf()
         set(newItems) {
             field = newItems.sortedBy { it.index }
+            notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.slidingpanelayout.widget.SlidingPaneLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sliding_pane_layout_track_selector"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_container_track_selector"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/gray_700">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_resolution_selector_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/spacing_4x"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/text_view_resolution_selector_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Resolução"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_ml"
+                android:textColor="@color/white"
+                android:focusable="false"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_resolution_selector_resolutions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_track_selector_audio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/spacing_4x"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/text_view_audios_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Áudio"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_ml"
+                android:textColor="@color/white"
+                android:focusable="false"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_track_selector_audios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:clipChildren="false"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_track_selector_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_4x"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/text_view_subtitle_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Legenda"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_size_ml"
+                android:textColor="@color/white"
+                android:focusable="false"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_track_selector_subtitles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:clipChildren="false"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.slidingpanelayout.widget.SlidingPaneLayout>

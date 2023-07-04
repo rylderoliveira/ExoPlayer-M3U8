@@ -15,10 +15,10 @@ import com.rylderoliveira.customplayer.databinding.ViewCustomPlayerBinding
 class CustomPlayerView : FrameLayout {
 
     private val inflater = LayoutInflater.from(context)
-    private val binding = ViewCustomPlayerBinding.inflate(inflater, this)
-    private val controllerView: ConstraintLayout =
-        binding.playerView.findViewById(R.id.constraint_layout_custom_controller)
-    private val mergeBinding = CustomPlayerControllersBinding.bind(controllerView)
+//    private val binding = ViewCustomPlayerBinding.inflate(inflater, this)
+//    private val controllerView: ConstraintLayout =
+//        binding.playerView.findViewById(R.id.constraint_layout_custom_controller)
+//    private val mergeBinding = CustomPlayerControllersBinding.bind(controllerView)
     var customFragmentManager: FragmentManager? = null
     var customPlayer: CustomPlayer = CustomPlayer.Builder(context).build()
     private val audioAdapter = TrackAdapter()
@@ -48,29 +48,29 @@ class CustomPlayerView : FrameLayout {
     }
 
     private fun initPlayer() {
-        binding.playerView.player = customPlayer.player
+//        binding.playerView.player = customPlayer.player
     }
 
     private fun initListeners() {
-        mergeBinding.apply {
-            buttonSelectAudio.setOnClickListener {
-                showTrackSelectorDialog(customPlayer.audioTracks, audioAdapter)
-            }
-            buttonSelectVideo.setOnClickListener {
-                showTrackSelectorDialog(customPlayer.videoTracks, videoAdapter)
-            }
-            buttonSelectSubtitle.setOnClickListener {
-                showTrackSelectorDialog(customPlayer.subtitleTracks, textAdapter)
-            }
-            buttonSelectTest.setOnClickListener {
-
-            }
-        }
+//        mergeBinding.apply {
+//            buttonSelectAudio.setOnClickListener {
+//                showTrackSelectorDialog(customPlayer.audioTracks, audioAdapter)
+//            }
+//            buttonSelectVideo.setOnClickListener {
+//                showTrackSelectorDialog(customPlayer.videoTracks, videoAdapter)
+//            }
+//            buttonSelectSubtitle.setOnClickListener {
+//                showTrackSelectorDialog(customPlayer.subtitleTracks, textAdapter)
+//            }
+//            buttonSelectTest.setOnClickListener {
+//
+//            }
+//        }
     }
 
     private fun init(attrs: AttributeSet?, defStyle: Int) {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.CustomPlayerView, defStyle, 0)
-        a.recycle()
+//        val a = context.obtainStyledAttributes(attrs, R.styleable.CustomPlayerView, defStyle, 0)
+//        a.recycle()
     }
 
     private fun showTrackSelectorDialog(tracks: List<CustomTrack>, adapter: TrackAdapter) {

@@ -1,6 +1,12 @@
 <resources>
-
-    <style name="Widget.Theme.ExoPlayerM3U8.MyView" parent="">
-        <item name="android:background">@color/gray_600</item>
+    <style name="PlayerButtons">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:padding">@dimen/spacing_4x</item>
+        <item name="android:background">@drawable/bg_button_playback_focus</item>
+        <item name="android:layout_marginTop">@dimen/spacing_4x</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_4x</item>
+        <item name="android:layout_marginStart">@dimen/spacing_4x</item>
+        <item name="tint">@color/color_player_button</item>
     </style>
 </resources>

@@ -46,6 +46,10 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-core:2.18.7'
     implementation 'com.google.android.material:material:1.9.0'
 
+    // Progress Bar Circular
+    implementation "com.mikhaellopez:circularprogressbar:3.1.0"
+    implementation 'androidx.slidingpanelayout:slidingpanelayout:1.2.0'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

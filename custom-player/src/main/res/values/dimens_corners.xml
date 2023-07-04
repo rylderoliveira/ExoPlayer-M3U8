@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="corner_1x">1dp</dimen>
+    <dimen name="corner_2x">2dp</dimen>
+    <dimen name="corner_3x">3dp</dimen>
+    <dimen name="corner_4x">4dp</dimen>
+    <dimen name="corner_5x">5dp</dimen>
+    <dimen name="corner_6x">6dp</dimen>
+    <dimen name="corner_7x">7dp</dimen>
+    <dimen name="corner_8x">8dp</dimen>
+    <dimen name="corner_9x">9dp</dimen>
+    <dimen name="corner_10x">10dp</dimen>
+</resources>

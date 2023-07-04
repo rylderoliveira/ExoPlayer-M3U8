@@ -3,9 +3,11 @@
     <dimen name="font_size_ss">12sp</dimen>
     <dimen name="font_size_sm">14sp</dimen>
     <dimen name="font_size_sl">16sp</dimen>
+    <dimen name="font_size_sx">18sp</dimen>
     <dimen name="font_size_ms">20sp</dimen>
     <dimen name="font_size_mm">22sp</dimen>
     <dimen name="font_size_ml">24sp</dimen>
+    <dimen name="font_size_mx">26sp</dimen>
     <dimen name="font_size_ls">30sp</dimen>
     <dimen name="font_size_lm">34sp</dimen>
     <dimen name="font_size_ll">38sp</dimen>

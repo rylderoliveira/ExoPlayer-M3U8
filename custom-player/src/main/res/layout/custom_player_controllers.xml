@@ -7,132 +7,133 @@
     android:layout_height="match_parent"
     tools:background="@color/black">
 
-    <ImageButton
-        android:id="@+id/image_button_player_back"
-        android:layout_width="@dimen/width_player_button"
-        android:layout_height="@dimen/height_player_button"
-        android:layout_margin="@dimen/spacing_10x"
-        android:background="@drawable/background_focused_icons_player"
-        android:contentDescription="@string/button_back_description"
-        android:src="@drawable/baseline_arrow_back_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
-
-    <ImageButton
-        android:id="@+id/image_button_player_replay"
-        android:layout_width="@dimen/width_player_button"
-        android:layout_height="@dimen/height_player_button"
-        android:layout_marginStart="@dimen/spacing_4x"
-        android:layout_marginTop="@dimen/spacing_10x"
-        android:background="@drawable/background_focused_icons_player"
-        android:contentDescription="@string/button_back_to_start_description"
-        android:src="@drawable/baseline_replay_24"
-        app:layout_constraintStart_toEndOf="@id/image_button_player_back"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
-
-    <ImageButton
-        android:id="@+id/exo_prev"
-        android:layout_width="@dimen/width_player_button"
-        android:layout_height="@dimen/height_player_button"
-        android:layout_marginStart="@dimen/spacing_4x"
-        android:layout_marginTop="@dimen/spacing_10x"
-        android:background="@drawable/background_focused_icons_player"
-        android:contentDescription="@string/button_previous_description"
-        android:src="@drawable/baseline_skip_previous_24"
-        app:layout_constraintStart_toEndOf="@id/image_button_player_replay"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
-
-    <ImageButton
-        android:id="@+id/exo_next"
-        android:layout_width="@dimen/width_player_button"
-        android:layout_height="@dimen/height_player_button"
-        android:layout_marginStart="@dimen/spacing_4x"
-        android:layout_marginTop="@dimen/spacing_10x"
-        android:background="@drawable/background_focused_icons_player"
-        android:contentDescription="@string/button_next_description"
-        android:src="@drawable/baseline_skip_next_24"
-        app:layout_constraintStart_toEndOf="@id/exo_prev"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
-
-    <TextView
-        android:id="@+id/text_view_player_focus_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_4x"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/font_size_ms"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/exo_next"
-        app:layout_constraintStart_toStartOf="@id/image_button_player_back"
-        app:layout_constraintTop_toBottomOf="@id/image_button_player_back"
-        tools:text="Text hint" />
-
-    <TextView
-        android:id="@+id/text_view_player_title_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_10x"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/font_size_ml"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="The Walking Dead" />
-
-    <TextView
-        android:id="@+id/text_view_player_media_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_2x"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/font_size_ms"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/text_view_player_title_name"
-        app:layout_constraintTop_toBottomOf="@id/text_view_player_title_name"
-        tools:text="Episode 1" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_24x"
-        android:layout_marginBottom="@dimen/spacing_8x"
+        android:layout_marginHorizontal="@dimen/spacing_10x"
+        android:layout_marginBottom="@dimen/spacing_4x"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageButton
-            android:id="@+id/exo_play_pause"
-            android:layout_width="@dimen/width_player_button"
-            android:layout_height="@dimen/height_player_button"
-            android:layout_margin="@dimen/spacing_1x"
-            android:background="@drawable/background_focused_icons_player"
-            android:contentDescription="@string/button_play_description"
-            android:src="@drawable/baseline_play_arrow_24"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linear_layout_container_buttons"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/exo_progress">
+
+            <ImageButton
+                android:id="@+id/button_restart"
+                android:layout_width="@dimen/width_player_button"
+                android:layout_height="@dimen/height_player_button"
+                android:layout_margin="@dimen/spacing_2x"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/button_play_description"
+                android:src="@drawable/ic_restart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/exo_progress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/red_700"/>
+
+            <ImageButton
+                android:id="@+id/button_previous"
+                android:layout_width="@dimen/width_player_button"
+                android:layout_height="@dimen/height_player_button"
+                android:layout_margin="@dimen/spacing_2x"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/button_play_description"
+                android:src="@drawable/ic_previous"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/exo_progress"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_rewind"
+                android:layout_width="@dimen/width_player_button"
+                android:layout_height="@dimen/height_player_button"
+                android:layout_margin="@dimen/spacing_2x"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/button_play_description"
+                android:src="@drawable/ic_rewind"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/exo_progress"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_play_pause"
+                android:layout_width="@dimen/width_player_button"
+                android:layout_height="@dimen/height_player_button"
+                android:layout_margin="@dimen/spacing_2x"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/button_play_description"
+                android:src="@drawable/ic_play"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/exo_progress"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_fastforward"
+                android:layout_width="@dimen/width_player_button"
+                android:layout_height="@dimen/height_player_button"
+                android:layout_margin="@dimen/spacing_2x"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/button_play_description"
+                android:src="@drawable/ic_fastforward"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/exo_progress"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_next2"
+                android:layout_width="@dimen/width_player_button"
+                android:layout_height="@dimen/height_player_button"
+                android:layout_margin="@dimen/spacing_2x"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/button_play_description"
+                android:src="@drawable/ic_next"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/exo_progress"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_repeat"
+                android:layout_width="@dimen/width_player_button"
+                android:layout_height="@dimen/height_player_button"
+                android:layout_margin="@dimen/spacing_2x"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/button_play_description"
+                android:src="@drawable/ic_repeat"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/exo_progress"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/exo_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_4x"
             android:textColor="@color/white"
+            android:paddingHorizontal="@dimen/spacing_4x"
             android:textSize="@dimen/font_size_ms"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/exo_play_pause"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/exo_progress"
+            app:layout_constraintBottom_toTopOf="@id/exo_progress"
+
             tools:text="00:00:00" />
 
         <com.google.android.exoplayer2.ui.DefaultTimeBar
             android:id="@+id/exo_progress"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_4x"
             android:contentDescription="@string/time_bar_description"
             app:buffered_color="@color/red_700"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -148,52 +149,53 @@
             android:id="@+id/exo_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_4x"
-            android:layout_marginEnd="@dimen/spacing_1x"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_ms"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:paddingHorizontal="@dimen/spacing_4x"
+            app:layout_constraintEnd_toEndOf="@id/exo_progress"
+            app:layout_constraintBottom_toTopOf="@id/exo_progress"
             tools:text="00:00:00" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_select_audio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_4x"
-            android:text="Audio"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/exo_progress" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_select_video"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_4x"
-            android:text="Video"
-            app:layout_constraintStart_toEndOf="@id/button_select_audio"
-            app:layout_constraintTop_toBottomOf="@id/exo_progress" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_select_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_4x"
-            android:text="Legenda"
-            app:layout_constraintStart_toEndOf="@id/button_select_video"
-            app:layout_constraintTop_toBottomOf="@id/exo_progress" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_select_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_4x"
-            android:text="Teste"
-            app:layout_constraintStart_toEndOf="@id/button_select_subtitle"
-            app:layout_constraintTop_toBottomOf="@id/exo_progress" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_layout_container_media_info"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/spacing_8x"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_view_title_name"
+            android:text="The Walking Dead: Dead City"
+            android:textColor="@color/color_text_default"
+            android:textSize="@dimen/font_size_ml"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_view_media_name"
+            android:visibility="visible"
+            android:text="Velhos Conhecimentos ( EP 1 - T1 )"
+            android:textColor="@color/color_text_default"
+            android:textSize="@dimen/font_size_sm"/>
+
+        <TextView
+            android:layout_width="@dimen/spacing_9x"
+            android:layout_height="@dimen/spacing_9x"
+            android:id="@+id/text_view_age_tag"
+            android:text="16"
+            android:background="@drawable/bg_age_tag"
+            android:layout_marginTop="@dimen/spacing_2x"
+            android:backgroundTint="@color/color_age_tag_16"
+            android:gravity="center"
+            android:textColor="@color/color_text_default"
+            android:textSize="@dimen/font_size_sx"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

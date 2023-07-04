@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="@color/gray_700">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linear_layout_exo_player_control"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@color/gray_700">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_top_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image_view_top_bar_logo"
+                android:layout_width="180dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_logo" />
+
+            <TextView
+                android:id="@+id/text_view_top_bar_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_ml"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_top_bar_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/image_view_top_bar_logo"
+                app:layout_constraintTop_toTopOf="@+id/image_view_top_bar_logo"
+                app:layout_constraintVertical_bias="0"
+                tools:text="1917" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_container_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_8x"
+            android:layout_marginBottom="@dimen/spacing_4x"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/linear_layout_container_buttons_playback"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@id/exo_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_4x"
+                android:layout_marginEnd="@dimen/spacing_4x"
+                android:layout_weight="0"
+                android:includeFontPadding="false"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_sm"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="00:00:00" />
+
+            <com.google.android.exoplayer2.ui.DefaultTimeBar
+                android:id="@id/exo_progress"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/exo_duration"
+                app:layout_constraintStart_toEndOf="@id/exo_position"
+                app:played_color="@color/flow_accent"
+                app:scrubber_color="@color/flow_accent" />
+
+            <TextView
+                android:id="@id/exo_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_4x"
+                android:layout_marginEnd="@dimen/spacing_4x"
+                android:layout_weight="0"
+                android:includeFontPadding="false"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_sm"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="00:00:00" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_container_buttons_playback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/constraint_layout_container_progress"
+
+            >
+
+            <ImageButton
+                android:id="@+id/button_play"
+                style="@style/PlayerButtons"
+                android:src="@drawable/ic_media_play"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/button_pause"
+                style="@style/PlayerButtons"
+                android:src="@drawable/ic_media_pause" />
+
+            <ImageButton
+                android:id="@+id/button_next"
+                style="@style/PlayerButtons"
+                android:src="@drawable/ic_media_next" />
+
+            <ImageButton
+                android:id="@+id/button_repeat"
+                style="@style/PlayerButtons"
+                android:src="@drawable/ic_media_repeat_off" />
+
+            <ImageButton
+                android:id="@+id/button_selector"
+                style="@style/PlayerButtons"
+                android:layout_marginEnd="@dimen/spacing_4x"
+                android:src="@drawable/ic_media_selector" />
+
+        </LinearLayout>
+
+        <androidx.slidingpanelayout.widget.SlidingPaneLayout
+            android:id="@+id/sliding_pane_layout_track_selector"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:layoutDirection="rtl"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:id="@+id/linear_layout_container_track_selector"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black_900"
+                android:gravity="center"
+                android:layoutDirection="ltr"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_resolution_selector_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_4x"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_view_videos_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:padding="@dimen/spacing_4x"
+                        android:text="Resolução"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_ms"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_track_selector_videos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_config" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_track_selector_audio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_4x"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_view_audios_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:padding="@dimen/spacing_4x"
+                        android:text="Áudio"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_ms"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_track_selector_audios"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_config" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_track_selector_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_4x"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_view_subtitle_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:padding="@dimen/spacing_4x"
+                        android:text="Legenda"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_ms"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_track_selector_subtitles"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_config" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/fragment_container_view_sliding"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.slidingpanelayout.widget.SlidingPaneLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>
