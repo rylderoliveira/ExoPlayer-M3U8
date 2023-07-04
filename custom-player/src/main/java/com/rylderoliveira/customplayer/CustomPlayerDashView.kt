@@ -108,6 +108,7 @@ constructor(
 
     override fun showExitDialog(activity: AppCompatActivity) {
 //        TODO: Implementar o dialog mais tarde
+        release()
         activity.finish()
     }
 
@@ -121,7 +122,7 @@ constructor(
     }
 
     override fun release() {
-        TODO("Not yet implemented")
+        customPlayer.release()
     }
 
     override fun showController() {
