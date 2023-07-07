@@ -2,30 +2,21 @@ package com.rylderoliveira.customplayer
 
 import android.content.Context
 import android.net.Uri
-import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.MediaMetadata
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.Player.COMMAND_PREPARE
-import com.google.android.exoplayer2.Player.Listener
-import com.google.android.exoplayer2.Player.STATE_READY
-import com.google.android.exoplayer2.Tracks
-import com.google.android.exoplayer2.extractor.mp4.Track
-import com.google.android.exoplayer2.source.TrackGroup
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.trackselection.MappingTrackSelector
-import com.google.android.exoplayer2.trackselection.TrackSelectionParameters
-import com.google.android.exoplayer2.trackselection.TrackSelector
-import java.util.Locale
+import androidx.media3.common.C
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
+import androidx.media3.common.Tracks
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 
+@UnstableApi
 class CustomPlayer(
     private val context: Context,
 ) {
 
-    private lateinit var trackSelector: TrackSelector
     private lateinit var trackExtractor: CustomExtractor
-    private lateinit var playerListener: Listener
+    private lateinit var playerListener: Player.Listener
     lateinit var player: ExoPlayer
 
     private val autoVideoTrack = CustomTrack(
@@ -38,7 +29,7 @@ class CustomPlayer(
         index = -1,
         name = "desligado".uppercase(),
         group = null,
-        type =C.TRACK_TYPE_TEXT,
+        type = C.TRACK_TYPE_TEXT,
     )
     val audioTracks: MutableList<CustomTrack> = mutableListOf()
     val videoTracks: MutableList<CustomTrack> = mutableListOf()
@@ -46,20 +37,14 @@ class CustomPlayer(
 
     private fun initialize() {
         player = ExoPlayer.Builder(context)
-            .setTrackSelector(trackSelector)
             .build()
+        trackExtractor = CustomExtractor(player.trackSelector as DefaultTrackSelector)
     }
 
     fun setMediaBy(url: String) {
         player.setMediaItem(MediaItem.fromUri(Uri.parse(url)))
-        player.prepare()
-//        player.addListener(object : Player.Listener {
-//            override fun onRenderedFirstFrame() {
-//                super.onRenderedFirstFrame()
-//                setCustomTracks()
-//            }
-//        })
         player.addListener(playerListener)
+        player.prepare()
     }
 
     fun setCustomTracks() {
@@ -113,39 +98,24 @@ class CustomPlayer(
 
     class Builder(private val context: Context) {
 
-        private var _trackSelector: MappingTrackSelector = DefaultTrackSelector(context)
-        private var _trackExtractor: CustomExtractor = CustomExtractor(_trackSelector)
         private lateinit var _playerListener: Player.Listener
-
-        fun setTrackSelector(trackSelector: MappingTrackSelector): Builder {
-            _trackSelector = trackSelector
-            return this
-        }
-
-        fun setTrackExtractor(trackExtractor: CustomExtractor): Builder {
-            _trackExtractor = trackExtractor
-            return this
-        }
-
+        private lateinit var _extractor: CustomExtractor
 
         fun setPlayerListener(playerListener: Player.Listener): Builder {
             _playerListener = playerListener
             return this
         }
 
+        fun setExtractor(extractor: CustomExtractor): Builder {
+            _extractor = extractor
+            return this
+        }
+
         fun build(): CustomPlayer {
             return CustomPlayer(context = context).apply {
-                trackSelector = _trackSelector
-                trackExtractor = _trackExtractor
                 playerListener = _playerListener
                 initialize()
             }
         }
-    }
-
-    companion object {
-        const val RENDERER_VIDEO_INDEX = 0
-        const val RENDERER_AUDIO_INDEX = 1
-        const val RENDERER_TEXT_INDEX = 2
     }
 }

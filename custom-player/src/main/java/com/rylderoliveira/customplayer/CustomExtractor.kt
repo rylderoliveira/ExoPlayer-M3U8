@@ -1,17 +1,14 @@
 package com.rylderoliveira.customplayer
 
-import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.Format
-import com.google.android.exoplayer2.Tracks
-import com.google.android.exoplayer2.source.TrackGroup
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.trackselection.MappingTrackSelector
-import com.google.android.exoplayer2.trackselection.TrackSelectionOverride
-import com.google.common.collect.ImmutableList
-import java.text.Normalizer.Form
+import androidx.media3.common.Format
+import androidx.media3.common.TrackSelectionOverride
+import androidx.media3.common.TrackSelectionParameters
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.trackselection.MappingTrackSelector
+import androidx.media3.exoplayer.trackselection.TrackSelector
 import java.util.Locale
 
-class CustomExtractor(
+@UnstableApi class CustomExtractor(
     private val trackSelector: MappingTrackSelector
 ) {
 
@@ -28,7 +25,7 @@ class CustomExtractor(
     }
 
     fun clearOverrides(type: Int) {
-        trackSelector.parameters = trackSelector.parameters.buildUpon()
+        trackSelector.parameters.buildUpon()
             .clearOverridesOfType(type)
             .build()
     }

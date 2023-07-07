@@ -1,10 +1,7 @@
 package com.rylderoliveira.customplayer
 
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player.RepeatMode
-import com.google.android.exoplayer2.trackselection.MappingTrackSelector
+import androidx.media3.common.Player
 
 interface CustomPlayerDash {
     fun initialize()
@@ -33,7 +30,7 @@ interface CustomPlayerDash {
     fun rewind()
     fun restart()
     fun seekTo()
-    fun setRepeatMode(repeatMode: RepeatMode)
+    fun setRepeatMode(repeatMode: Player.RepeatMode)
     fun updateButtons()
     fun updateTracks()
 }

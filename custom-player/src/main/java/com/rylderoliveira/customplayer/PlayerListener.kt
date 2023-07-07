@@ -1,11 +1,8 @@
 package com.rylderoliveira.customplayer
 
-import android.util.Log
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.PlaybackParameters
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.Player.STATE_READY
-import com.google.android.exoplayer2.Tracks
+import androidx.media3.common.Player
+import androidx.media3.common.Player.STATE_READY
+import androidx.media3.common.Tracks
 
 class PlayerListener( private val listener: CustomPlayerDash) : Player.Listener {
 
@@ -20,9 +17,5 @@ class PlayerListener( private val listener: CustomPlayerDash) : Player.Listener 
         super.onTracksChanged(tracks)
         listener.updateTracks()
         listener.updateButtons()
-    }
-
-    override fun onEvents(player: Player, events: Player.Events) {
-        super.onEvents(player, events)
     }
 }

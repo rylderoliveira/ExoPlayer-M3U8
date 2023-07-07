@@ -6,16 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.player.PlayerActivity">
 
-<!--    <com.rylderoliveira.customplayer.CustomPlayerView-->
-<!--        android:id="@+id/custom_player_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:background="@color/black"/>-->
-
     <com.rylderoliveira.customplayer.CustomPlayerDashView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/custom_player_view"
+        android:id="@+id/custom_view_dash"
         android:background="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

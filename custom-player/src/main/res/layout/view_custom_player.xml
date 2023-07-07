@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.exoplayer2.ui.StyledPlayerView
+    <androidx.media3.ui.PlayerView
         android:id="@+id/player_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:animation_enabled="false"
-        app:controller_layout_id="@layout/custom_player_controller_option_1" />
+        app:controller_layout_id="@layout/player_controller" />
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/circular_progress_bar_playback"

@@ -1,6 +1,6 @@
 package com.rylderoliveira.customplayer
 
-import com.google.android.exoplayer2.source.TrackGroup
+import androidx.media3.common.TrackGroup
 
 data class CustomTrack(
     val index: Int,

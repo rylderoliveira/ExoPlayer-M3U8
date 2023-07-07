@@ -13,6 +13,8 @@
             android:id="@+id/constraint_layout_top_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -24,6 +26,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:clickable="false"
+                android:focusable="false"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -36,6 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:clickable="false"
+                android:focusable="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_ml"
                 android:textStyle="bold"
@@ -55,6 +61,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_8x"
             android:layout_marginBottom="@dimen/spacing_4x"
+            android:clickable="false"
+            android:focusable="false"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/linear_layout_container_buttons_playback"
@@ -75,12 +83,14 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_sm"
                 android:textStyle="bold"
+                android:clickable="false"
+                android:focusable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="00:00:00" />
 
-            <com.google.android.exoplayer2.ui.DefaultTimeBar
+            <androidx.media3.ui.DefaultTimeBar
                 android:id="@id/exo_progress"
                 android:layout_width="0dp"
                 android:layout_height="24dp"
@@ -106,6 +116,8 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_sm"
                 android:textStyle="bold"
+                android:clickable="false"
+                android:focusable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -119,9 +131,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/constraint_layout_container_progress"
-
-            >
+            app:layout_constraintStart_toStartOf="@id/constraint_layout_container_progress">
 
             <ImageButton
                 android:id="@+id/button_play"
@@ -153,111 +163,99 @@
 
         </LinearLayout>
 
-        <androidx.slidingpanelayout.widget.SlidingPaneLayout
-            android:id="@+id/sliding_pane_layout_track_selector"
+        <LinearLayout
+            android:id="@+id/linear_layout_container_track_selector"
             android:layout_width="350dp"
             android:layout_height="match_parent"
-            android:layoutDirection="rtl"
-            app:layout_constraintStart_toStartOf="parent">
+            android:background="@color/black_900"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible">
 
             <LinearLayout
-                android:id="@+id/linear_layout_container_track_selector"
+                android:id="@+id/linear_layout_resolution_selector_area"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black_900"
-                android:gravity="center"
-                android:layoutDirection="ltr"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_4x"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/linear_layout_resolution_selector_area"
+                <TextView
+                    android:id="@+id/text_view_videos_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_4x"
-                    android:orientation="vertical">
+                    android:focusable="false"
+                    android:padding="@dimen/spacing_4x"
+                    android:text="Resolução"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_ms"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/text_view_videos_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:padding="@dimen/spacing_4x"
-                        android:text="Resolução"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_ms"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_view_track_selector_videos"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:itemCount="3"
-                        tools:listitem="@layout/item_config" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linear_layout_track_selector_audio"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_track_selector_videos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_4x"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/text_view_audios_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:padding="@dimen/spacing_4x"
-                        android:text="Áudio"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_ms"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_view_track_selector_audios"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:itemCount="3"
-                        tools:listitem="@layout/item_config" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linear_layout_track_selector_subtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_4x"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/text_view_subtitle_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:padding="@dimen/spacing_4x"
-                        android:text="Legenda"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_ms"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_view_track_selector_subtitles"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:itemCount="3"
-                        tools:listitem="@layout/item_config" />
-
-                </LinearLayout>
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_config" />
 
             </LinearLayout>
 
-            <FrameLayout
-                android:id="@+id/fragment_container_view_sliding"
+            <LinearLayout
+                android:id="@+id/linear_layout_track_selector_audio"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_4x"
+                android:orientation="vertical">
 
-        </androidx.slidingpanelayout.widget.SlidingPaneLayout>
+                <TextView
+                    android:id="@+id/text_view_audios_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:padding="@dimen/spacing_4x"
+                    android:text="Áudio"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_ms"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_track_selector_audios"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_config" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_track_selector_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_4x"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_view_subtitle_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:padding="@dimen/spacing_4x"
+                    android:text="Legenda"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_ms"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_track_selector_subtitles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_config" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

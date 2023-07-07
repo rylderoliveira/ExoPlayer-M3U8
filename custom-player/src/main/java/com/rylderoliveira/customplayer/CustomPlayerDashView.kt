@@ -5,18 +5,19 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
+import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.ui.PlayerView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.ui.StyledPlayerView.ControllerVisibilityListener
-import com.rylderoliveira.customplayer.databinding.CustomPlayerControllerOption1Binding
+import com.rylderoliveira.customplayer.databinding.PlayerControllerBinding
 import com.rylderoliveira.customplayer.databinding.ViewCustomPlayerBinding
 import com.rylderoliveira.extensions.hide
 import com.rylderoliveira.extensions.show
 
 
-class CustomPlayerDashView
+@UnstableApi class CustomPlayerDashView
 @JvmOverloads
 constructor(
     context: Context,
@@ -24,20 +25,15 @@ constructor(
     defStyleAttr: Int = 0,
 ) : FrameLayout(context, attributeSet, defStyleAttr), CustomPlayerDash {
 
-    private val trackSelector = DefaultTrackSelector(context)
-    private val trackExtractor = CustomExtractor(trackSelector)
-    private val playerListener = PlayerListener(this)
     private val inflater = LayoutInflater.from(context)
     private val binding = ViewCustomPlayerBinding.inflate(inflater, this, true)
-    private val controller = CustomPlayerControllerOption1Binding.bind(binding.playerView)
+    private val controller = PlayerControllerBinding.bind(binding.playerView)
     private val videoAdapter: TrackAdapter = TrackAdapter()
     private val audioAdapter: TrackAdapter = TrackAdapter()
     private val textAdapter: TrackAdapter = TrackAdapter()
     var customFragmentManager: FragmentManager? = null
     var customPlayer: CustomPlayer = CustomPlayer.Builder(context)
-        .setTrackSelector(trackSelector)
-        .setTrackExtractor(trackExtractor)
-        .setPlayerListener(playerListener)
+        .setPlayerListener(PlayerListener(this))
         .build()
 
     init {
@@ -56,18 +52,22 @@ constructor(
             next()
         }
         controller.buttonSelector.setOnClickListener {
-            if (controller.slidingPaneLayoutTrackSelector.isOpen) {
-                controller.slidingPaneLayoutTrackSelector.closePane()
-                controller.slidingPaneLayoutTrackSelector.requestFocus()
+            if (controller.linearLayoutContainerTrackSelector.isVisible) {
+                controller.linearLayoutContainerTrackSelector.hide()
             } else {
-                controller.slidingPaneLayoutTrackSelector.openPane()
+                controller.linearLayoutContainerTrackSelector.show()
+                controller.linearLayoutContainerTrackSelector.requestFocus()
             }
         }
-        binding.playerView.setControllerVisibilityListener(ControllerVisibilityListener { visibility ->
-            if (visibility == GONE) {
-                controller.slidingPaneLayoutTrackSelector.openPane()
+        binding.playerView.setControllerVisibilityListener(PlayerView.ControllerVisibilityListener { visibility ->
+            if (visibility == VISIBLE) {
+                controller.linearLayoutContainerTrackSelector.hide()
             }
         })
+        controller.exoProgress.setOnFocusChangeListener { view, b ->
+
+
+        }
     }
 
     override fun updateTracks() {
@@ -99,11 +99,7 @@ constructor(
     }
 
     fun onBackPressed(activity: AppCompatActivity) {
-        if (controller.slidingPaneLayoutTrackSelector.isOpen.not()) {
-            controller.slidingPaneLayoutTrackSelector.openPane()
-        } else {
-            showExitDialog(activity)
-        }
+
     }
 
     override fun showExitDialog(activity: AppCompatActivity) {
@@ -118,7 +114,6 @@ constructor(
 
     override fun initialize() {
         binding.playerView.player = customPlayer.player
-        controller.slidingPaneLayoutTrackSelector.open()
     }
 
     override fun release() {

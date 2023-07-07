@@ -9,8 +9,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.rylderoliveira.customplayer.databinding.CustomPlayerControllersBinding
-import com.rylderoliveira.customplayer.databinding.ViewCustomPlayerBinding
 
 class CustomPlayerView : FrameLayout {
 

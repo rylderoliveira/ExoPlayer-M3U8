@@ -12,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_10x"
+        android:focusable="false"
+        android:clickable="false"
         android:layout_marginBottom="@dimen/spacing_4x"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -124,13 +126,15 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:paddingHorizontal="@dimen/spacing_4x"
+            android:focusable="false"
+            android:clickable="false"
             android:textSize="@dimen/font_size_ms"
             app:layout_constraintStart_toStartOf="@id/exo_progress"
             app:layout_constraintBottom_toTopOf="@id/exo_progress"
 
             tools:text="00:00:00" />
 
-        <com.google.android.exoplayer2.ui.DefaultTimeBar
+        <androidx.media3.ui.DefaultTimeBar
             android:id="@+id/exo_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -151,6 +155,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_ms"
+            android:focusable="false"
+            android:clickable="false"
             android:paddingHorizontal="@dimen/spacing_4x"
             app:layout_constraintEnd_toEndOf="@id/exo_progress"
             app:layout_constraintBottom_toTopOf="@id/exo_progress"
@@ -164,6 +170,8 @@
         android:id="@+id/linear_layout_container_media_info"
         android:orientation="vertical"
         android:layout_margin="@dimen/spacing_8x"
+        android:focusable="false"
+        android:clickable="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -171,6 +179,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/text_view_title_name"
+            android:duplicateParentState="true"
             android:text="The Walking Dead: Dead City"
             android:textColor="@color/color_text_default"
             android:textSize="@dimen/font_size_ml"/>
@@ -180,6 +189,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/text_view_media_name"
             android:visibility="visible"
+            android:duplicateParentState="true"
             android:text="Velhos Conhecimentos ( EP 1 - T1 )"
             android:textColor="@color/color_text_default"
             android:textSize="@dimen/font_size_sm"/>
@@ -189,6 +199,7 @@
             android:layout_height="@dimen/spacing_9x"
             android:id="@+id/text_view_age_tag"
             android:text="16"
+            android:duplicateParentState="true"
             android:background="@drawable/bg_age_tag"
             android:layout_marginTop="@dimen/spacing_2x"
             android:backgroundTint="@color/color_age_tag_16"
