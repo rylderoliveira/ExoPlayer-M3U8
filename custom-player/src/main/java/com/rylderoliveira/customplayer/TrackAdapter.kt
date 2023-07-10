@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class TrackAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var selectedPosition = FIRST_INDEX
+    var selectedPosition = FIRST_INDEX
     lateinit var listener: ((CustomTrack) -> Unit)
     var items: List<CustomTrack> = listOf()
         set(newItems) {

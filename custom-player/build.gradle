@@ -41,16 +41,15 @@ dependencies {
 
     // ExoPlayer 2
     implementation "androidx.media3:media3-exoplayer:1.1.0"
-//    implementation "androidx.media3:media3-exoplayer-dash:1.1.0"
-//    implementation "androidx.media3:media3-exoplayer-hls:1.1.0"
     implementation "androidx.media3:media3-ui:1.1.0"
-//    implementation "androidx.media3:media3-session:1.1.0"
-//    implementation "androidx.media3:media3-common:1.1.0"
     implementation 'com.google.android.material:material:1.9.0'
 
     // Progress Bar Circular
     implementation "com.mikhaellopez:circularprogressbar:3.1.0"
     implementation 'androidx.slidingpanelayout:slidingpanelayout:1.2.0'
+
+    // OkHttp
+    implementation('com.squareup.okhttp3:okhttp:5.0.0-alpha.11')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

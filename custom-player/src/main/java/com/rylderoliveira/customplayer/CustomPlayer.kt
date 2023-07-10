@@ -7,8 +7,11 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.Tracks
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
+import okhttp3.OkHttp
 
 @UnstableApi
 class CustomPlayer(
@@ -36,8 +39,17 @@ class CustomPlayer(
     val subtitleTracks: MutableList<CustomTrack> = mutableListOf()
 
     private fun initialize() {
+        val userAgent = "okhttp/${OkHttp.VERSION}"
+        val defaultDataSourceFactory = DefaultHttpDataSource.Factory()
+            .setUserAgent(userAgent)
+            .setConnectTimeoutMs(DefaultHttpDataSource.DEFAULT_CONNECT_TIMEOUT_MILLIS)
+            .setReadTimeoutMs(DefaultHttpDataSource.DEFAULT_READ_TIMEOUT_MILLIS)
+            .setAllowCrossProtocolRedirects(true)
+
         player = ExoPlayer.Builder(context)
+            .setMediaSourceFactory(DefaultMediaSourceFactory(defaultDataSourceFactory))
             .build()
+
         trackExtractor = CustomExtractor(player.trackSelector as DefaultTrackSelector)
     }
 

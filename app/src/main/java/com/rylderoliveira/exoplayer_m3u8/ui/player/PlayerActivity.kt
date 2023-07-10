@@ -1,35 +1,27 @@
 package com.rylderoliveira.exoplayer_m3u8.ui.player
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.View.OnClickListener
+import android.view.KeyEvent
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.session.MediaSession
-import com.rylderoliveira.customplayer.CustomPlayer
 import com.rylderoliveira.exoplayer_m3u8.databinding.ActivityPlayerBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@UnstableApi class PlayerActivity : Activity() {
+@UnstableApi
+class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
-//    private val viewModel: PlayerViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initPlayer()
-//        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                binding.customViewDash.onBackPressed(this@PlayerActivity)
-//            }
-//        })
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                binding.customViewDash.onBackPressed(this@PlayerActivity)
+            }
+        })
     }
 
     private fun initPlayer() {
@@ -48,5 +40,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
     override fun onDestroy() {
         super.onDestroy()
         binding.customViewDash.customPlayer.release()
+    }
+
+    override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
+        binding.customViewDash.showController()
+        return super.dispatchKeyEvent(event)
     }
 }

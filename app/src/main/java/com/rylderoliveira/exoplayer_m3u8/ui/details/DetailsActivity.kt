@@ -24,7 +24,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
         binding.button.setOnClickListener {
             val intent = Intent(this, PlayerActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 }

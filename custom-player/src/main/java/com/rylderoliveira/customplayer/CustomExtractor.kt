@@ -2,10 +2,8 @@ package com.rylderoliveira.customplayer
 
 import androidx.media3.common.Format
 import androidx.media3.common.TrackSelectionOverride
-import androidx.media3.common.TrackSelectionParameters
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.trackselection.MappingTrackSelector
-import androidx.media3.exoplayer.trackselection.TrackSelector
 import java.util.Locale
 
 @UnstableApi class CustomExtractor(
@@ -25,7 +23,7 @@ import java.util.Locale
     }
 
     fun clearOverrides(type: Int) {
-        trackSelector.parameters.buildUpon()
+        trackSelector.parameters = trackSelector.parameters.buildUpon()
             .clearOverridesOfType(type)
             .build()
     }

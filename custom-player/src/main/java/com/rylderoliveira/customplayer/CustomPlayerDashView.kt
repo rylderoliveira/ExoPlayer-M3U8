@@ -65,8 +65,9 @@ constructor(
             }
         })
         controller.exoProgress.setOnFocusChangeListener { view, b ->
-
-
+            if (b) {
+                controller.linearLayoutContainerTrackSelector.hide()
+            }
         }
     }
 
@@ -99,7 +100,11 @@ constructor(
     }
 
     fun onBackPressed(activity: AppCompatActivity) {
-
+        if (controller.linearLayoutContainerTrackSelector.isVisible) {
+            controller.linearLayoutContainerTrackSelector.hide()
+        } else {
+            activity.finish()
+        }
     }
 
     override fun showExitDialog(activity: AppCompatActivity) {
@@ -121,7 +126,7 @@ constructor(
     }
 
     override fun showController() {
-        TODO("Not yet implemented")
+        binding.playerView.showController()
     }
 
     override fun hideController() {
