@@ -58,7 +58,6 @@ class CustomPlayer(
     }
 
     fun setMediaBy(url: String) {
-        isSeries = false
         player.setMediaItem(MediaItem.fromUri(Uri.parse(url)))
         player.addListener(playerListener)
         player.prepare()
@@ -68,7 +67,9 @@ class CustomPlayer(
         val mediaItems = urlList.map {
             MediaItem.fromUri(Uri.parse(it))
         }
-        isSeries = true
+        if (mediaItems.size > 1) {
+            isSeries = true
+        }
         player.setMediaItems(mediaItems)
         player.addListener(playerListener)
         player.prepare()

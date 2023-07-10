@@ -9,7 +9,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
 import androidx.media3.common.Player
 import androidx.media3.common.Player.REPEAT_MODE_ALL
 import androidx.media3.common.Player.REPEAT_MODE_OFF
@@ -156,6 +155,7 @@ constructor(
 
     override fun initialize() {
         binding.playerView.player = customPlayer.player
+        controller.exoProgress.setKeyTimeIncrement(10000L)
     }
 
     override fun release() {
