@@ -2,7 +2,6 @@ package com.rylderoliveira.customplayer
 
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
-import androidx.media3.common.Player.STATE_READY
 import androidx.media3.common.Tracks
 
 class PlayerListener( private val listener: CustomPlayerDash) : Player.Listener {
@@ -13,13 +12,26 @@ class PlayerListener( private val listener: CustomPlayerDash) : Player.Listener 
 
     override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
         super.onMediaItemTransition(mediaItem, reason)
+        listener.clearTracks()
     }
+
 
     override fun onPlaybackStateChanged(playbackState: Int) {
         super.onPlaybackStateChanged(playbackState)
-        if (playbackState == STATE_READY) {
-            listener.updateButtons()
-            listener.updateTracks()
-        }
+    }
+
+    override fun onPlayWhenReadyChanged(playWhenReady: Boolean, reason: Int) {
+        super.onPlayWhenReadyChanged(playWhenReady, reason)
+    }
+
+    override fun onRepeatModeChanged(repeatMode: Int) {
+        listener.onRepeatModeChanged(repeatMode)
+        super.onRepeatModeChanged(repeatMode)
+    }
+
+    override fun onRenderedFirstFrame() {
+        super.onRenderedFirstFrame()
+        listener.updateButtons()
+        listener.updateTracks()
     }
 }

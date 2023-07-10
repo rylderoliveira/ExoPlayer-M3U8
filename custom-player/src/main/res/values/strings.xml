@@ -8,5 +8,7 @@
     <string name="button_previous_description">Previous</string>
     <string name="button_next_description">Next</string>
     <string name="button_play_description">Play</string>
-
+    <string name="repeat_mode_off">Modo de repetição desligado</string>
+    <string name="repeat_mode_one">Repetir mídia</string>
+    <string name="repeat_mode_all">Repetir temporada</string>
 </resources>

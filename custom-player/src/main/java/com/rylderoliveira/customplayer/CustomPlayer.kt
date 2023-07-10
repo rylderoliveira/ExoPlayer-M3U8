@@ -5,6 +5,9 @@ import android.net.Uri
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
+import androidx.media3.common.Player.REPEAT_MODE_ALL
+import androidx.media3.common.Player.REPEAT_MODE_OFF
+import androidx.media3.common.Player.REPEAT_MODE_ONE
 import androidx.media3.common.Tracks
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultHttpDataSource
@@ -21,6 +24,7 @@ class CustomPlayer(
     private lateinit var trackExtractor: CustomExtractor
     private lateinit var playerListener: Player.Listener
     lateinit var player: ExoPlayer
+    private var isSeries: Boolean = false
 
     private val autoVideoTrack = CustomTrack(
         index = -1,
@@ -54,7 +58,18 @@ class CustomPlayer(
     }
 
     fun setMediaBy(url: String) {
+        isSeries = false
         player.setMediaItem(MediaItem.fromUri(Uri.parse(url)))
+        player.addListener(playerListener)
+        player.prepare()
+    }
+
+    fun setMediaBy(urlList: List<String>) {
+        val mediaItems = urlList.map {
+            MediaItem.fromUri(Uri.parse(it))
+        }
+        isSeries = true
+        player.setMediaItems(mediaItems)
         player.addListener(playerListener)
         player.prepare()
     }
@@ -105,6 +120,15 @@ class CustomPlayer(
 
     fun restart() {
         player.seekTo(0L)
+    }
+
+    fun updateRepeatMode() {
+        player.repeatMode = when (player.repeatMode) {
+            REPEAT_MODE_OFF -> REPEAT_MODE_ONE
+            REPEAT_MODE_ONE -> if (isSeries) REPEAT_MODE_ALL else REPEAT_MODE_OFF
+            REPEAT_MODE_ALL -> REPEAT_MODE_OFF
+            else -> REPEAT_MODE_OFF
+        }
     }
 
 

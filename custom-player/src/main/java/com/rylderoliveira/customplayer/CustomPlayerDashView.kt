@@ -4,10 +4,16 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import android.widget.Toast
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.media3.common.Player
+import androidx.media3.common.Player.REPEAT_MODE_ALL
+import androidx.media3.common.Player.REPEAT_MODE_OFF
+import androidx.media3.common.Player.REPEAT_MODE_ONE
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.PlayerView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,8 +37,7 @@ constructor(
     private val videoAdapter: TrackAdapter = TrackAdapter()
     private val audioAdapter: TrackAdapter = TrackAdapter()
     private val textAdapter: TrackAdapter = TrackAdapter()
-    var customFragmentManager: FragmentManager? = null
-    var customPlayer: CustomPlayer = CustomPlayer.Builder(context)
+    private var customPlayer: CustomPlayer = CustomPlayer.Builder(context)
         .setPlayerListener(PlayerListener(this))
         .build()
 
@@ -69,6 +74,30 @@ constructor(
                 controller.linearLayoutContainerTrackSelector.hide()
             }
         }
+        controller.buttonRepeat.setOnClickListener {
+            customPlayer.updateRepeatMode()
+        }
+    }
+
+    override fun clearTracks() {
+        with(customPlayer) {
+            audioTracks.clear()
+            videoTracks.clear()
+            subtitleTracks.clear()
+        }
+    }
+
+    override fun onRepeatModeChanged(repeatMode: Int) {
+        when (repeatMode) {
+            REPEAT_MODE_OFF -> handleNewRepeatMode(R.drawable.ic_media_repeat_off, R.string.repeat_mode_off)
+            REPEAT_MODE_ONE -> handleNewRepeatMode(R.drawable.ic_media_repeat_one, R.string.repeat_mode_one)
+            REPEAT_MODE_ALL -> handleNewRepeatMode(R.drawable.ic_media_repeat_all, R.string.repeat_mode_all)
+        }
+    }
+
+    private fun handleNewRepeatMode(@DrawableRes icResource: Int, @StringRes message: Int) {
+        controller.buttonRepeat.setImageResource(icResource)
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun updateTracks() {
@@ -105,6 +134,14 @@ constructor(
         } else {
             activity.finish()
         }
+    }
+
+    override fun setMediaBy(url: String) {
+        customPlayer.setMediaBy(url)
+    }
+
+    override fun setMediaBy(urlList: List<String>) {
+        customPlayer.setMediaBy(urlList)
     }
 
     override fun showExitDialog(activity: AppCompatActivity) {
@@ -184,12 +221,14 @@ constructor(
     override fun play() {
         controller.buttonPlay.hide()
         controller.buttonPause.show()
+        controller.buttonPause.requestFocus()
         customPlayer.play()
     }
 
     override fun pause() {
         controller.buttonPause.hide()
         controller.buttonPlay.show()
+        controller.buttonPlay.requestFocus()
         customPlayer.pause()
     }
 
@@ -204,6 +243,7 @@ constructor(
     override fun updateButtons() {
         val hasNext = customPlayer.player.hasNextMediaItem()
         controller.buttonNext.isEnabled = hasNext
+        controller.buttonNext.isFocusable = hasNext
     }
 
     override fun fastForward() {

@@ -33,13 +33,19 @@ class PlayerActivity : AppCompatActivity() {
 //        player.setMediaItem(MediaItem.fromUri("http://154.53.54.134/maid.mp4"))
 //        player.setMediaItem(MediaItem.fromUri("http://lb03.odeon-service.xyz/data1/videos/filme/dual/decada/2020/897561_freddiemercurythefinalact/h264/576/freddiemercurythefinalact.mp4"))
 //        binding.customViewDash.customPlayer.setMediaBy("https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8")
-        binding.customViewDash.customPlayer.setMediaBy("https://i-slave1.odeonvod.com/data1/videos/filme/dual/decada/2020/505642_pantera_negra_wakanda_para_sempre/source.smil/manifest.mpd")
-        binding.customViewDash.customPlayer.play()
+//        binding.customViewDash.customPlayer.setMediaBy("https://i-slave1.odeonvod.com/data1/videos/filme/dual/decada/2020/505642_pantera_negra_wakanda_para_sempre/source.smil/manifest.mpd")
+        val urls = listOf<String>(
+            "https://i-slave1.odeonvod.com/data1/videos/filme/dual/decada/2020/505642_pantera_negra_wakanda_para_sempre/source.smil/manifest.mpd",
+            "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8",
+        )
+//        binding.customViewDash.setMediaBy("https://i-slave1.odeonvod.com/data1/videos/filme/dual/decada/2020/505642_pantera_negra_wakanda_para_sempre/source.smil/manifest.mpd")
+        binding.customViewDash.setMediaBy(urls)
+        binding.customViewDash.play()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.customViewDash.customPlayer.release()
+        binding.customViewDash.release()
     }
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {

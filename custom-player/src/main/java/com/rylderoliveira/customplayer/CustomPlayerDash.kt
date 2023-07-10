@@ -33,4 +33,8 @@ interface CustomPlayerDash {
     fun setRepeatMode(repeatMode: Player.RepeatMode)
     fun updateButtons()
     fun updateTracks()
+    fun clearTracks()
+    fun setMediaBy(url: String)
+    fun setMediaBy(urlList: List<String>)
+    fun onRepeatModeChanged(repeatMode: Int)
 }
