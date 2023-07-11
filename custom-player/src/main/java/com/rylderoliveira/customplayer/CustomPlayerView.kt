@@ -18,7 +18,7 @@ class CustomPlayerView : FrameLayout {
 //        binding.playerView.findViewById(R.id.constraint_layout_custom_controller)
 //    private val mergeBinding = CustomPlayerControllersBinding.bind(controllerView)
     var customFragmentManager: FragmentManager? = null
-    var customPlayer: CustomPlayer = CustomPlayer.Builder(context).build()
+//    var customPlayer: CustomPlayer = CustomPlayer.Builder(context).build()
     private val audioAdapter = TrackAdapter()
     private val videoAdapter = TrackAdapter()
     private val textAdapter = TrackAdapter()
@@ -72,16 +72,16 @@ class CustomPlayerView : FrameLayout {
     }
 
     private fun showTrackSelectorDialog(tracks: List<CustomTrack>, adapter: TrackAdapter) {
-        TrackSelectorDialog().apply {
-            this.adapter = adapter
-            this.onTrackClick = { track -> customPlayer.selectTrack(track) }
-            this.tracks = tracks
-            customFragmentManager?.let { show(it, null) } ?: run {
-                Log.e(
-                    this.tag,
-                    "The TrackSelectorDialog needs to have a FragmentManager to be displayed."
-                )
-            }
-        }
+//        TrackSelectorDialog().apply {
+//            this.adapter = adapter
+//            this.onTrackClick = { track -> customPlayer.selectTrack(track) }
+//            this.tracks = tracks
+//            customFragmentManager?.let { show(it, null) } ?: run {
+//                Log.e(
+//                    this.tag,
+//                    "The TrackSelectorDialog needs to have a FragmentManager to be displayed."
+//                )
+//            }
+//        }
     }
 }

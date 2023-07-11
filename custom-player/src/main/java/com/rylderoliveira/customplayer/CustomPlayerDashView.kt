@@ -143,16 +143,6 @@ constructor(
         customPlayer.setMediaBy(urlList)
     }
 
-    override fun showExitDialog(activity: AppCompatActivity) {
-//        TODO: Implementar o dialog mais tarde
-        release()
-        activity.finish()
-    }
-
-    override fun keepWatchingDialog() {
-        TODO("Not yet implemented")
-    }
-
     override fun initialize() {
         binding.playerView.player = customPlayer.player
         controller.exoProgress.setKeyTimeIncrement(10000L)
@@ -164,58 +154,6 @@ constructor(
 
     override fun showController() {
         binding.playerView.showController()
-    }
-
-    override fun hideController() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showLoading() {
-        TODO("Not yet implemented")
-    }
-
-    override fun hideLoading() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showNextEpisodeProgress() {
-        TODO("Not yet implemented")
-    }
-
-    override fun hideNextEpisodeProgress() {
-        TODO("Not yet implemented")
-    }
-
-    override fun saveCurrentPosition() {
-        TODO("Not yet implemented")
-    }
-
-    override fun setPreferredAudio() {
-        TODO("Not yet implemented")
-    }
-
-    override fun setPreferredVideo() {
-        TODO("Not yet implemented")
-    }
-
-    override fun setPreferredText() {
-        TODO("Not yet implemented")
-    }
-
-    override fun setSubtitleStyle() {
-        TODO("Not yet implemented")
-    }
-
-    override fun loadMediaParams() {
-        TODO("Not yet implemented")
-    }
-
-    override fun loadAvailableTracks() {
-        TODO("Not yet implemented")
-    }
-
-    override fun loadPlaylist() {
-        TODO("Not yet implemented")
     }
 
     override fun play() {
@@ -246,23 +184,19 @@ constructor(
         controller.buttonNext.isFocusable = hasNext
     }
 
-    override fun fastForward() {
-        TODO("Not yet implemented")
-    }
-
-    override fun rewind() {
-        TODO("Not yet implemented")
-    }
-
     override fun restart() {
         customPlayer.restart()
     }
 
-    override fun seekTo() {
-        TODO("Not yet implemented")
+    override fun showLoading() {
+        binding.viewAnimationPlayback.show()
     }
 
-    override fun setRepeatMode(repeatMode: Player.RepeatMode) {
-        TODO("Not yet implemented")
+    override fun hideLoading() {
+        binding.viewAnimationPlayback.hide()
+    }
+
+    override fun shouldShowNextEpisode() {
+
     }
 }
