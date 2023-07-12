@@ -18,4 +18,5 @@ interface CustomPlayerDash {
     fun showLoading()
     fun hideLoading()
     fun shouldShowNextEpisode()
+    fun clearRunnable()
 }

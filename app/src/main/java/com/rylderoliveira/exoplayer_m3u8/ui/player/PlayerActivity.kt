@@ -46,6 +46,10 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
+        if (binding.customViewDash.isRunningNextEpisode) {
+            if (event?.keyCode == KeyEvent.KEYCODE_BACK) onBackPressedDispatcher
+            return true
+        }
         binding.customViewDash.showController()
         return super.dispatchKeyEvent(event)
     }

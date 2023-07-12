@@ -19,13 +19,14 @@ class PlayerListener(private val listener: CustomPlayerDash) : Player.Listener {
     }
 
     override fun onIsLoadingChanged(isLoading: Boolean) {
-        listener.shouldShowNextEpisode()
+        if (isLoading) listener.shouldShowNextEpisode()
         super.onIsLoadingChanged(isLoading)
     }
 
     override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
         super.onMediaItemTransition(mediaItem, reason)
         listener.clearTracks()
+        listener.clearRunnable()
     }
 
     override fun onRepeatModeChanged(repeatMode: Int) {

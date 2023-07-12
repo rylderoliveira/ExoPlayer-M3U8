@@ -9,7 +9,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.media3.common.Player
 import androidx.media3.common.Player.REPEAT_MODE_ALL
 import androidx.media3.common.Player.REPEAT_MODE_OFF
 import androidx.media3.common.Player.REPEAT_MODE_ONE
@@ -39,6 +38,18 @@ constructor(
     private var customPlayer: CustomPlayer = CustomPlayer.Builder(context)
         .setPlayerListener(PlayerListener(this))
         .build()
+    var isRunningNextEpisode = false
+    private val runnableNextEpisode: Runnable = object : Runnable {
+        override fun run() {
+            val current = customPlayer.player.currentPosition
+            val duration = customPlayer.player.duration
+            if (duration - current <= 10000L) {
+                showNextEpisode(duration - current)
+                isRunningNextEpisode = true
+            }
+            postDelayed(this, 1000L)
+        }
+    }
 
     init {
         initialize()
@@ -150,6 +161,13 @@ constructor(
 
     override fun release() {
         customPlayer.release()
+        clearRunnable()
+    }
+
+    override fun clearRunnable() {
+        removeCallbacks(runnableNextEpisode)
+        binding.constraintLayoutContainerNextEpisode.visibility = GONE
+        isRunningNextEpisode = false
     }
 
     override fun showController() {
@@ -197,6 +215,29 @@ constructor(
     }
 
     override fun shouldShowNextEpisode() {
+        val currentPosition = customPlayer.player.currentPosition
+        val duration = customPlayer.player.duration
+        if (duration > 0
+            && duration - currentPosition < 60000L
+            && isRunningNextEpisode.not()
+            && customPlayer.player.hasNextMediaItem()) {
+            post(runnableNextEpisode)
+        }
+    }
 
+    private fun showNextEpisode(time: Long) {
+        if (binding.constraintLayoutContainerNextEpisode.isVisible.not()) {
+            startProgressAnimation(time)
+        }
+        binding.constraintLayoutContainerNextEpisode.isVisible = true
+        binding.textViewCircularProgressBarPlayback.text = (time / 1000L).toString()
+        if (time <= 0L) {
+            clearRunnable()
+        }
+    }
+
+    private fun startProgressAnimation(time: Long) {
+        binding.circularProgressBarPlayback.progress = 0f
+        binding.circularProgressBarPlayback.setProgressWithAnimation(100f, time)
     }
 }

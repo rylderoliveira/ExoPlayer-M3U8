@@ -12,6 +12,7 @@ import androidx.media3.common.Tracks
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.LoadControl
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import okhttp3.OkHttp
@@ -49,23 +50,28 @@ class CustomPlayer(
             .setConnectTimeoutMs(DefaultHttpDataSource.DEFAULT_CONNECT_TIMEOUT_MILLIS)
             .setReadTimeoutMs(DefaultHttpDataSource.DEFAULT_READ_TIMEOUT_MILLIS)
             .setAllowCrossProtocolRedirects(true)
-
+        val defaultMediaSourceFactory = DefaultMediaSourceFactory(defaultDataSourceFactory)
         player = ExoPlayer.Builder(context)
-            .setMediaSourceFactory(DefaultMediaSourceFactory(defaultDataSourceFactory))
+            .setMediaSourceFactory(defaultMediaSourceFactory)
             .build()
-
         trackExtractor = CustomExtractor(player.trackSelector as DefaultTrackSelector)
     }
 
     fun setMediaBy(url: String) {
-        player.setMediaItem(MediaItem.fromUri(Uri.parse(url)))
+        player.setMediaItem(
+            MediaItem.Builder()
+            .setUri(Uri.parse(url))
+            .build()
+        )
         player.addListener(playerListener)
         player.prepare()
     }
 
     fun setMediaBy(urlList: List<String>) {
         val mediaItems = urlList.map {
-            MediaItem.fromUri(Uri.parse(it))
+            MediaItem.Builder()
+                .setUri(Uri.parse(it))
+                .build()
         }
         if (mediaItems.size > 1) {
             isSeries = true
