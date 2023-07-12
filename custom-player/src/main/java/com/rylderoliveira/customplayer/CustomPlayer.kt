@@ -13,8 +13,12 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.LoadControl
+import androidx.media3.exoplayer.SeekParameters
+import androidx.media3.exoplayer.analytics.AnalyticsListener
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
+import androidx.media3.exoplayer.trackselection.MappingTrackSelector
+import androidx.media3.exoplayer.util.EventLogger
 import okhttp3.OkHttp
 
 @UnstableApi
@@ -22,6 +26,7 @@ class CustomPlayer(
     private val context: Context,
 ) {
 
+    private val tag = "CustomPlayer"
     private lateinit var trackExtractor: CustomExtractor
     private lateinit var playerListener: Player.Listener
     lateinit var player: ExoPlayer
@@ -53,7 +58,14 @@ class CustomPlayer(
         val defaultMediaSourceFactory = DefaultMediaSourceFactory(defaultDataSourceFactory)
         player = ExoPlayer.Builder(context)
             .setMediaSourceFactory(defaultMediaSourceFactory)
-            .build()
+            .build().apply {
+                pauseAtEndOfMediaItems = true
+                playWhenReady = true
+                repeatMode = REPEAT_MODE_OFF
+                addAnalyticsListener(EventLogger(tag))
+                addListener(playerListener)
+                prepare()
+            }
         trackExtractor = CustomExtractor(player.trackSelector as DefaultTrackSelector)
     }
 
@@ -63,22 +75,16 @@ class CustomPlayer(
             .setUri(Uri.parse(url))
             .build()
         )
-        player.addListener(playerListener)
-        player.prepare()
+
     }
 
     fun setMediaBy(urlList: List<String>) {
-        val mediaItems = urlList.map {
+        isSeries.takeIf { urlList.size > 1 }
+        player.setMediaItems(urlList.map {
             MediaItem.Builder()
                 .setUri(Uri.parse(it))
                 .build()
-        }
-        if (mediaItems.size > 1) {
-            isSeries = true
-        }
-        player.setMediaItems(mediaItems)
-        player.addListener(playerListener)
-        player.prepare()
+        })
     }
 
     fun setCustomTracks() {

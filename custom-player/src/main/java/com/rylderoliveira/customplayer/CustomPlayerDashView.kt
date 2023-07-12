@@ -175,21 +175,18 @@ constructor(
     }
 
     override fun play() {
-        controller.buttonPlay.hide()
-        controller.buttonPause.show()
-        controller.buttonPause.requestFocus()
         customPlayer.play()
     }
 
     override fun pause() {
-        controller.buttonPause.hide()
-        controller.buttonPlay.show()
-        controller.buttonPlay.requestFocus()
         customPlayer.pause()
     }
 
     override fun next() {
-        customPlayer.next()
+        if (customPlayer.player.hasNextMediaItem()) {
+            customPlayer.next()
+            customPlayer.play()
+        }
     }
 
     override fun previous() {
@@ -208,6 +205,7 @@ constructor(
 
     override fun showLoading() {
         binding.viewAnimationPlayback.show()
+        showController()
     }
 
     override fun hideLoading() {
@@ -226,7 +224,7 @@ constructor(
     }
 
     private fun showNextEpisode(time: Long) {
-        if (binding.constraintLayoutContainerNextEpisode.isVisible.not()) {
+        if (binding.constraintLayoutContainerNextEpisode.isVisible.not() && time > 0L) {
             startProgressAnimation(time)
         }
         binding.constraintLayoutContainerNextEpisode.isVisible = true
@@ -239,5 +237,15 @@ constructor(
     private fun startProgressAnimation(time: Long) {
         binding.circularProgressBarPlayback.progress = 0f
         binding.circularProgressBarPlayback.setProgressWithAnimation(100f, time)
+    }
+
+    override fun showButtonPause() {
+        controller.buttonPlay.hide()
+        controller.buttonPause.show()
+    }
+
+    override fun showButtonPlay() {
+        controller.buttonPause.hide()
+        controller.buttonPlay.show()
     }
 }
