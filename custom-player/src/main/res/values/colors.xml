@@ -32,8 +32,18 @@
     <color name="gray_400">#FFBDBDBD</color>
 
 
-<!--    Flow Colors     -->
-    <color name="flow_accent">#FFD800</color>
-    <color name="flow_accent_disable">#54FFD800</color>
-    <color name="focus_default">#80858585</color>
+    <!-- Color Primary ($color-base) -->
+    <color name="colorPrimary">#1A4155</color>
+    <color name="colorPrimaryDark">#102835</color>
+    <color name="colorGrayLight">#3D3D3D</color>
+    <color name="colorWhiteTV">#EEEEEE</color>
+    <color name="colorTranslucentWhite">#33EEEEEE</color>
+    <color name="colorPrimaryLight">@color/colorGrayLight</color>
+    <color name="colorPrimaryLightest">@color/colorWhiteTV</color>
+
+    <!-- Color Accent ($color-brand) -->
+    <color name="colorAccent">#EEEEEE</color>
+    <color name="colorAccentDark">#AFAFAF</color>
+    <color name="colorAccentBuffered">#80EEEEEE</color>
+
 </resources>

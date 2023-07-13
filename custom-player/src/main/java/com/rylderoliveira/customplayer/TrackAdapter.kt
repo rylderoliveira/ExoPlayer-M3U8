@@ -1,5 +1,6 @@
 package com.rylderoliveira.customplayer
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,8 +24,8 @@ class TrackAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val itemViewHolder = holder as ItemViewHolder
-        itemViewHolder.bind(items[position])
         itemViewHolder.itemView.isSelected = selectedPosition == position
+        itemViewHolder.bind(items[position])
     }
 
     override fun getItemCount(): Int = items.size
@@ -44,6 +45,7 @@ class TrackAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(customTrack: CustomTrack) {
             textView.text = customTrack.name
+            textView.typeface = if (itemView.isSelected) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
         }
     }
 

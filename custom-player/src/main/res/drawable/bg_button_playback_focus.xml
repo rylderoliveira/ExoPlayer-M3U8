@@ -11,7 +11,7 @@
             <corners android:radius="48dp" />
             <solid android:color="@android:color/transparent" />
             <stroke
-                android:color="?android:attr/colorAccent"
+                android:color="@color/colorAccent"
                 android:width="2dp" />
         </shape>
     </item>
@@ -20,7 +20,7 @@
             <corners android:radius="48dp" />
             <solid android:color="@android:color/transparent" />
             <stroke
-                android:color="?android:attr/colorAccent"
+                android:color="@color/colorAccent"
                 android:width="@dimen/stroke_2x" />
         </shape>
     </item>

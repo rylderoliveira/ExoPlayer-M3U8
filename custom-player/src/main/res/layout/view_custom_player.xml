@@ -27,7 +27,7 @@
             android:layout_height="56dp"
             android:layout_marginTop="@dimen/spacing_4x"
             android:layout_marginEnd="@dimen/spacing_4x"
-            app:cpb_progressbar_color="@color/flow_accent"
+            app:cpb_progressbar_color="@color/colorAccent"
             app:cpb_progressbar_width="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +41,7 @@
             android:layout_marginEnd="@dimen/spacing_4x"
             android:gravity="center"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/colorWhiteTV"
             android:textSize="@dimen/font_size_ms"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -79,6 +79,7 @@
             android:id="@+id/progress_animation_playback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:indeterminateTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="@id/text_animation_playback"
             app:layout_constraintEnd_toStartOf="@id/text_animation_playback"
             app:layout_constraintTop_toTopOf="@id/text_animation_playback" />
@@ -91,12 +92,14 @@
             android:paddingStart="@dimen/spacing_6x"
             android:text="@string/playback_loading_media"
             android:textSize="@dimen/font_size_ml"
+            android:textColor="@color/colorWhiteTV"
             android:textStyle="bold"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
