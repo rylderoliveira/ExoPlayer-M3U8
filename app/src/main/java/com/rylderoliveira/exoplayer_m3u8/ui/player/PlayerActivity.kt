@@ -5,11 +5,8 @@ import android.view.KeyEvent
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.media3.common.util.UnstableApi
 import com.rylderoliveira.exoplayer_m3u8.databinding.ActivityPlayerBinding
-import kotlinx.coroutines.launch
 
 @UnstableApi
 class PlayerActivity : AppCompatActivity() {
@@ -47,7 +44,7 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
         if (binding.customViewDash.isRunningNextEpisode) {
-            if (event?.keyCode == KeyEvent.KEYCODE_BACK) onBackPressedDispatcher
+            if (event?.keyCode == KeyEvent.KEYCODE_BACK) return super.dispatchKeyEvent(event)
             return true
         }
         binding.customViewDash.showController()
