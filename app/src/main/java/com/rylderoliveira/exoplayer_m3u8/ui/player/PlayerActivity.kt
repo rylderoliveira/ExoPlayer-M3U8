@@ -32,7 +32,6 @@ class PlayerActivity : AppCompatActivity() {
             "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8",
         )
 //        binding.customViewDash.setMediaBy("https://i-slave1.odeonvod.com/data1/videos/filme/dual/decada/2020/505642_pantera_negra_wakanda_para_sempre/source.smil/manifest.mpd")
-
         binding.customViewDash.setMediaBy(urls)
         binding.customViewDash.play()
     }

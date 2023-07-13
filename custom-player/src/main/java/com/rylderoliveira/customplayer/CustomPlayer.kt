@@ -79,7 +79,7 @@ class CustomPlayer(
     }
 
     fun setMediaBy(urlList: List<String>) {
-        isSeries.takeIf { urlList.size > 1 }
+        isSeries = urlList.size > 1
         player.setMediaItems(urlList.map {
             MediaItem.Builder()
                 .setUri(Uri.parse(it))
