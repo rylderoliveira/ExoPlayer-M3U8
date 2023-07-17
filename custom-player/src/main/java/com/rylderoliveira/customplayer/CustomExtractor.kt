@@ -6,14 +6,16 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.trackselection.MappingTrackSelector
 import java.util.Locale
 
-@UnstableApi class CustomExtractor(
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+class CustomExtractor(
     private val trackSelector: MappingTrackSelector
 ) {
 
     private val localeDefault = Locale.getDefault()
     private val locale = Locale.getAvailableLocales()
 
-    fun selectCustomTrack(customTrack: CustomTrack) {
+
+    fun  selectCustomTrack(customTrack: CustomTrack) {
         if (customTrack.group != null) {
             trackSelector.parameters = trackSelector.parameters.buildUpon()
                 .clearOverridesOfType(customTrack.type)

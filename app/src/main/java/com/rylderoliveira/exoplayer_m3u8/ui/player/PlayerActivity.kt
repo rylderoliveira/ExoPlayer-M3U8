@@ -3,16 +3,13 @@ package com.rylderoliveira.exoplayer_m3u8.ui.player
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.media3.common.util.UnstableApi
 import com.rylderoliveira.exoplayer_m3u8.databinding.ActivityPlayerBinding
 
-@UnstableApi
 class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
-    private val viewModel: PlayerViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -21,7 +21,7 @@ import androidx.media3.exoplayer.trackselection.MappingTrackSelector
 import androidx.media3.exoplayer.util.EventLogger
 import okhttp3.OkHttp
 
-@UnstableApi
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class CustomPlayer(
     private val context: Context,
 ) {
@@ -59,7 +59,7 @@ class CustomPlayer(
         player = ExoPlayer.Builder(context)
             .setMediaSourceFactory(defaultMediaSourceFactory)
             .build().apply {
-                pauseAtEndOfMediaItems = true
+//                pauseAtEndOfMediaItems = true
                 playWhenReady = true
                 repeatMode = REPEAT_MODE_OFF
                 addAnalyticsListener(EventLogger(tag))

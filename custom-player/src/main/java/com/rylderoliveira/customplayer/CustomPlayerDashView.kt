@@ -20,8 +20,7 @@ import com.rylderoliveira.customplayer.databinding.ViewCustomPlayerBinding
 import com.rylderoliveira.extensions.hide
 import com.rylderoliveira.extensions.show
 
-
-@UnstableApi class CustomPlayerDashView
+class CustomPlayerDashView
 @JvmOverloads
 constructor(
     context: Context,
@@ -154,6 +153,7 @@ constructor(
         customPlayer.setMediaBy(urlList)
     }
 
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun initialize() {
         binding.playerView.player = customPlayer.player
         controller.exoProgress.setKeyTimeIncrement(10000L)
@@ -170,6 +170,7 @@ constructor(
         isRunningNextEpisode = false
     }
 
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun showController() {
         binding.playerView.showController()
     }
