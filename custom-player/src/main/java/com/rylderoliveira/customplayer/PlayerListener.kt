@@ -41,6 +41,8 @@ class PlayerListener(private val listener: CustomPlayerDash) : Player.Listener {
         listener.clearRunnable()
     }
 
+
+
     override fun onRepeatModeChanged(repeatMode: Int) {
         listener.onRepeatModeChanged(repeatMode)
         super.onRepeatModeChanged(repeatMode)

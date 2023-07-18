@@ -78,8 +78,8 @@ constructor(
             }
         }
         binding.playerView.setControllerVisibilityListener(PlayerView.ControllerVisibilityListener { visibility ->
-            if (visibility == VISIBLE) {
-                controller.linearLayoutContainerTrackSelector.close(this)
+            if (visibility == GONE && controller.linearLayoutContainerTrackSelector.isVisible) {
+                controller.linearLayoutContainerTrackSelector.hide()
             }
         })
         controller.exoProgress.setOnFocusChangeListener { view, b ->
@@ -143,7 +143,7 @@ constructor(
 
     fun onBackPressed(activity: AppCompatActivity) {
         if (controller.linearLayoutContainerTrackSelector.isVisible) {
-            controller.linearLayoutContainerTrackSelector.hide()
+            controller.linearLayoutContainerTrackSelector.close(this)
         } else {
             activity.finish()
         }
