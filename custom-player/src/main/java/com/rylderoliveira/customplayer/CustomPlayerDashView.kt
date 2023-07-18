@@ -2,12 +2,14 @@ package com.rylderoliveira.customplayer
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.media3.common.Player.REPEAT_MODE_ALL
 import androidx.media3.common.Player.REPEAT_MODE_OFF
@@ -17,7 +19,9 @@ import androidx.media3.ui.PlayerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rylderoliveira.customplayer.databinding.PlayerControllerBinding
 import com.rylderoliveira.customplayer.databinding.ViewCustomPlayerBinding
+import com.rylderoliveira.extensions.close
 import com.rylderoliveira.extensions.hide
+import com.rylderoliveira.extensions.open
 import com.rylderoliveira.extensions.show
 
 class CustomPlayerDashView
@@ -67,20 +71,20 @@ constructor(
         }
         controller.buttonSelector.setOnClickListener {
             if (controller.linearLayoutContainerTrackSelector.isVisible) {
-                controller.linearLayoutContainerTrackSelector.hide()
+                controller.linearLayoutContainerTrackSelector.close(this)
             } else {
-                controller.linearLayoutContainerTrackSelector.show()
+                controller.linearLayoutContainerTrackSelector.open(this)
                 controller.linearLayoutContainerTrackSelector.requestFocus()
             }
         }
         binding.playerView.setControllerVisibilityListener(PlayerView.ControllerVisibilityListener { visibility ->
             if (visibility == VISIBLE) {
-                controller.linearLayoutContainerTrackSelector.hide()
+                controller.linearLayoutContainerTrackSelector.close(this)
             }
         })
         controller.exoProgress.setOnFocusChangeListener { view, b ->
-            if (b) {
-                controller.linearLayoutContainerTrackSelector.hide()
+            if (b && controller.linearLayoutContainerTrackSelector.isVisible) {
+                controller.linearLayoutContainerTrackSelector.close(this)
             }
         }
         controller.buttonRepeat.setOnClickListener {

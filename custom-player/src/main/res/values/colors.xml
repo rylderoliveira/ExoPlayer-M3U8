@@ -33,17 +33,17 @@
 
 
     <!-- Color Primary ($color-base) -->
-    <color name="colorPrimary">#1A4155</color>
-    <color name="colorPrimaryDark">#102835</color>
-    <color name="colorGrayLight">#3D3D3D</color>
-    <color name="colorWhiteTV">#EEEEEE</color>
-    <color name="colorTranslucentWhite">#33EEEEEE</color>
-    <color name="colorPrimaryLight">@color/colorGrayLight</color>
-    <color name="colorPrimaryLightest">@color/colorWhiteTV</color>
+    <color name="CpColorPrimary">#1A4155</color>
+    <color name="CpColorPrimaryDark">#102835</color>
+    <color name="CpColorGrayLight">#3D3D3D</color>
+    <color name="CpColorWhiteTV">#EEEEEE</color>
+    <color name="CpColorTranslucentWhite">#33EEEEEE</color>
+    <color name="CpColorPrimaryLight">@color/CpColorGrayLight</color>
+    <color name="CpColorPrimaryLightest">@color/CpColorWhiteTV</color>
 
     <!-- Color Accent ($color-brand) -->
-    <color name="colorAccent">#EEEEEE</color>
-    <color name="colorAccentDark">#AFAFAF</color>
-    <color name="colorAccentBuffered">#80EEEEEE</color>
+    <color name="CpColorAccent">#EEEEEE</color>
+    <color name="CpColorAccentDark">#AFAFAF</color>
+    <color name="CpColorAccentBuffered">#80EEEEEE</color>
 
 </resources>

@@ -113,12 +113,12 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    app:buffered_color="@color/colorAccentBuffered"
+                    app:buffered_color="@color/CpColorAccentBuffered"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/exo_duration"
                     app:layout_constraintStart_toEndOf="@id/exo_position"
-                    app:played_color="@color/colorAccent"
-                    app:scrubber_color="@color/colorAccent" />
+                    app:played_color="@color/CpColorAccent"
+                    app:scrubber_color="@color/CpColorAccent" />
 
                 <TextView
                     android:id="@id/exo_duration"
@@ -214,7 +214,7 @@
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    app:dividerColor="@color/colorTranslucentWhite" />
+                    app:dividerColor="@color/CpColorTranslucentWhite" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_track_selector_videos"
@@ -246,7 +246,7 @@
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    app:dividerColor="@color/colorTranslucentWhite" />
+                    app:dividerColor="@color/CpColorTranslucentWhite" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_track_selector_audios"
@@ -278,7 +278,7 @@
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    app:dividerColor="@color/colorTranslucentWhite" />
+                    app:dividerColor="@color/CpColorTranslucentWhite" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_track_selector_subtitles"

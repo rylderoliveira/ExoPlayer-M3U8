@@ -31,8 +31,8 @@ class PlayerListener(private val listener: CustomPlayerDash) : Player.Listener {
     }
 
     override fun onIsPlayingChanged(isPlaying: Boolean) {
-        if (isPlaying) listener.showButtonPause() else listener.showButtonPlay()
         super.onIsPlayingChanged(isPlaying)
+        if (isPlaying) listener.showButtonPause() else listener.showButtonPlay()
     }
 
     override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
