@@ -2,19 +2,16 @@ package com.rylderoliveira.customplayer
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.media3.common.Player.REPEAT_MODE_ALL
 import androidx.media3.common.Player.REPEAT_MODE_OFF
 import androidx.media3.common.Player.REPEAT_MODE_ONE
-import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.PlayerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rylderoliveira.customplayer.databinding.PlayerControllerBinding
@@ -71,9 +68,9 @@ constructor(
         }
         controller.buttonSelector.setOnClickListener {
             if (controller.linearLayoutContainerTrackSelector.isVisible) {
-                controller.linearLayoutContainerTrackSelector.close(this)
+                controller.linearLayoutContainerTrackSelector.close()
             } else {
-                controller.linearLayoutContainerTrackSelector.open(this)
+                controller.linearLayoutContainerTrackSelector.open()
                 controller.linearLayoutContainerTrackSelector.requestFocus()
             }
         }
@@ -84,7 +81,7 @@ constructor(
         })
         controller.exoProgress.setOnFocusChangeListener { view, b ->
             if (b && controller.linearLayoutContainerTrackSelector.isVisible) {
-                controller.linearLayoutContainerTrackSelector.close(this)
+                controller.linearLayoutContainerTrackSelector.close()
             }
         }
         controller.buttonRepeat.setOnClickListener {
@@ -94,6 +91,9 @@ constructor(
 
     override fun clearTracks() {
         with(customPlayer) {
+            controller.recyclerViewTrackSelectorVideos.adapter = null
+            controller.recyclerViewTrackSelectorAudios.adapter = null
+            controller.recyclerViewTrackSelectorSubtitles.adapter = null
             audioTracks.clear()
             videoTracks.clear()
             subtitleTracks.clear()
@@ -114,6 +114,9 @@ constructor(
     }
 
     override fun updateTracks() {
+        if (controller.recyclerViewTrackSelectorVideos.adapter != null) return
+        if (controller.recyclerViewTrackSelectorAudios.adapter != null) return
+        if (controller.recyclerViewTrackSelectorSubtitles.adapter != null) return
         customPlayer.setCustomTracks()
         controller.recyclerViewTrackSelectorVideos.apply {
             adapter = videoAdapter
@@ -143,7 +146,7 @@ constructor(
 
     fun onBackPressed(activity: AppCompatActivity) {
         if (controller.linearLayoutContainerTrackSelector.isVisible) {
-            controller.linearLayoutContainerTrackSelector.close(this)
+            controller.linearLayoutContainerTrackSelector.close()
         } else {
             activity.finish()
         }

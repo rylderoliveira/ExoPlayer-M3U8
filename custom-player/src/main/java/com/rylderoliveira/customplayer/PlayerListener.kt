@@ -1,10 +1,7 @@
 package com.rylderoliveira.customplayer
 
-import android.util.Log
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
-import androidx.media3.common.Timeline
-import androidx.media3.common.text.CueGroup
 
 class PlayerListener(private val listener: CustomPlayerDash) : Player.Listener {
 
@@ -40,8 +37,6 @@ class PlayerListener(private val listener: CustomPlayerDash) : Player.Listener {
         listener.clearTracks()
         listener.clearRunnable()
     }
-
-
 
     override fun onRepeatModeChanged(repeatMode: Int) {
         listener.onRepeatModeChanged(repeatMode)

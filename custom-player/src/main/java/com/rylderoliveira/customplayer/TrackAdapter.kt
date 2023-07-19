@@ -14,6 +14,7 @@ class TrackAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var items: List<CustomTrack> = listOf()
         set(newItems) {
             field = newItems.sortedBy { it.index }
+            selectedPosition = FIRST_INDEX
             notifyDataSetChanged()
         }
 

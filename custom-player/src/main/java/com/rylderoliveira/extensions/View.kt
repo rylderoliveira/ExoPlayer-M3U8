@@ -1,14 +1,9 @@
 package com.rylderoliveira.extensions
 
 import android.animation.ObjectAnimator
-import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.core.animation.doOnEnd
-import androidx.core.animation.doOnStart
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
+import androidx.core.view.doOnAttach
 
 fun View.hide() {
     visibility = View.GONE
@@ -19,17 +14,17 @@ fun View.show() {
     requestFocus()
 }
 
-fun View.open(parent: ViewGroup) {
+fun View.open() {
     ObjectAnimator.ofFloat(this, View.TRANSLATION_X, 0f).apply {
-        duration = 1000
+        duration = 700
         start()
-        doOnStart { visibility = View.VISIBLE }
+        doOnAttach { visibility = View.VISIBLE }
     }
 }
 
-fun View.close(parent: ViewGroup) {
+fun View.close() {
     ObjectAnimator.ofFloat(this, View.TRANSLATION_X, width.toFloat()).apply {
-        duration = 1000
+        duration = 700
         start()
         doOnEnd { visibility = View.GONE }
     }
